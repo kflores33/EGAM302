@@ -1,17 +1,79 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
-using System.Collections;
-using Unity.Collections;
+using System.IO;
+using Newtonsoft.Json; // used to import directly into a dictionary
 
-
-// this should (in theory) import the .json data and populate scriptable objects with the information (i dont know how to do that yet...)
 public class WeaponDataImport : MonoBehaviour
 {
-    public TextAsset WeaponJson;
+    // const is used so that the values cannot be changed after compiling (i suppose?---basically, these paths will never be changed)
+    private const string JSON_PATH = "Assets/Data/Resources/WeaponList.json";
+    private const string OUTPUT_FOLDER = "Assets/Data/Weapons";
+    private const string DATABASE_PATH = OUTPUT_FOLDER + "/WeaponDatabase.asset";
 
+    [MenuItem("Tools/Import Weapons From JSON")] // Access this function from UnityEditor's menus
+    public static void ImportWeapons() // 
+    {
+        if (!File.Exists(JSON_PATH))
+        {
+            Debug.LogError("JSON file not found at " +  JSON_PATH);
+            return;
+        }
+        
+        string json = File.ReadAllText(JSON_PATH);
 
+        // JsonConver.DeserializeObject function from Newtonsoft.Json namespace used to directly parse data into a dictionary
+        var parsed = JsonConvert.DeserializeObject<Dictionary<string, WeaponJsonData>>(json);
 
+        if (!AssetDatabase.IsValidFolder(OUTPUT_FOLDER))
+            AssetDatabase.CreateFolder("Data", "Weapons"); // makes a "Weapons" folder under the "Data" folder if it doesn't already exist
 
+        List<WeaponScriptable> createdWeapons = new List<WeaponScriptable>(); // make a list to keep track of created weapons
+
+        foreach (var weaponEntry in parsed) // populate/create scriptable objects with information from JSON
+        {
+            string weapon_id = weaponEntry.Key; 
+            WeaponJsonData jsonData = weaponEntry.Value;
+
+            string assetPath = $"{OUTPUT_FOLDER}/{weapon_id}.asset"; //define asset path
+            WeaponScriptable asset = AssetDatabase.LoadAssetAtPath<WeaponScriptable>(assetPath); // try loading existing scriptable object
+
+            // create new asset if missing
+            if (asset == null)
+            {
+                asset = ScriptableObject.CreateInstance<WeaponScriptable>();
+                AssetDatabase.CreateAsset(asset, assetPath);
+            }
+
+            // update values
+            asset.wpnname = jsonData.wpnname;
+            asset.weapon_id = weapon_id;
+            asset.ability_name = jsonData.ability_name;
+            asset.type = jsonData.type;
+            asset.game = jsonData.game;
+            asset.levels = jsonData.levels;
+
+            EditorUtility.SetDirty(asset); // notify unity editor that asset has changed and needs to be saved
+            createdWeapons.Add(asset);
+        }
+
+        // build/update database
+        WeaponDatabase db = AssetDatabase.LoadAssetAtPath<WeaponDatabase>(DATABASE_PATH); // try loading existing scriptable object
+        
+        // create new asset if missing
+        if (db == null) 
+        {
+            db = ScriptableObject.CreateInstance<WeaponDatabase>();
+            AssetDatabase.CreateAsset (db, DATABASE_PATH);
+        }
+        db.allWeapons = createdWeapons; // copy the createdWeapons list over to the new db asset
+
+        EditorUtility.SetDirty(db);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        Debug.Log($"Imported {createdWeapons.Count} weapons from JSON!");
+    }
 }
 
 [System.Serializable]

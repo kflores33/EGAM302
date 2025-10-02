@@ -1,5 +1,6 @@
 {
   "butchers_joy": {
+    "wpnname": "Butcher's Joy",
     "ability_name": "Sacrificial Breath",
     "type": [
       "one_handed_sword"
@@ -9,12 +10,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Butcher's Joy",
         "level": 1,
         "story": "Juices oozing from tender, succulent flesh, the sweet aroma of fine herbs... The master cook made dishes of meat that none in the city could resist.",
         "attack_strength": 2,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "A curtain and 0 flame orbs persist for 10 seconds. Attack power is increased to 150%. Damage is reduced to 66%.",
         "ability_count": 0,
         "ability_sec": 10,
@@ -27,7 +27,7 @@
         "story": "Every day, customers lined up outside his inn, waiting for their chance to partake. Even the king himself would sneak down from his castle to sample the master's art.",
         "attack_strength": 4,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "A curtain and 1 flame orb persists for 15 seconds. Attack power is increased to 200%. Damage is reduced to 50%.",
         "ability_count": 1,
         "ability_sec": 15,
@@ -40,7 +40,7 @@
         "story": "But once he entered his kitchen, the smiling cook's face would grow stern. The meat he used was no ordinary meat...",
         "attack_strength": 5,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "A curtain and 3 flame orbs persist for 20 seconds. Attack power is increased to 250%. Damage is reduced to 40%.",
         "ability_count": 3,
         "ability_sec": 20,
@@ -53,7 +53,7 @@
         "story": "The years passed, and the cook and his inn disappeared from the town. But his\ncleaver remains as gleaming and sharp as ever, waiting for its next master.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "A curtain and 4 flame orbs persist for 20 seconds. Attack power is increased to 300%. Damage is reduced to 33%.",
         "ability_count": 4,
         "ability_sec": 20,
@@ -63,6 +63,7 @@
     ]
   },
   "deathdance": {
+    "wpnname": "Deathdance",
     "ability_name": "Queen Hel's Comfort",
     "type": [
       "one_handed_sword"
@@ -72,12 +73,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Deathdance",
         "level": 1,
         "story": "A long time ago, there was a small nation that was invaded by its mighty neighbor. The country was helpless as the invaders put its women and children to the sword.",
         "attack_strength": 2,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 swirl of black shadow spins out from Caim.",
         "ability_count": 1,
         "kills_to_level": 50
@@ -87,7 +87,7 @@
         "story": "In the small country, there was a brave and beautiful princess who became determined to save her homeland. She disguised herself as a dancing girl and presented herself to the enemy emperor.",
         "attack_strength": 4,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "2 swirls of black shadow spin out from Caim.",
         "ability_count": 2,
         "kills_to_level": 100
@@ -97,7 +97,7 @@
         "story": "The emperor, entranced by the beauty of the dance, immediately fell in love with the princess. But as he approached her, she plunged this sword into his breast and slew him on the spot.",
         "attack_strength": 5,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "4 swirls of black shadow spin out from Caim.",
         "ability_count": 4,
         "kills_to_level": 150
@@ -107,13 +107,14 @@
         "story": "After that, the mighty empire fell into ruin and decline, and the princess's country was saved. To this day, every girl of the kingdom dreams of becoming\nthe dancing princess of legend.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "8 swirls of black shadow spin out from Caim.",
         "ability_count": 8
       }
     ]
   },
   "glorys_bane": {
+    "wpnname": "Glory's Bane",
     "ability_name": "Damocles' Strike",
     "type": [
       "one_handed_sword"
@@ -123,12 +124,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Glory's Bane",
         "level": 1,
         "story": "Once upon a time, on a warm spring day, an evil dragon attacked a palace. He killed the royal family, the palace guard, and even the court jester, just because he felt like it. Satisfied with his work, the dragon settled down for a nap in the throne room, and it was then that a little girl walked in, holding a sword. She shook the dragon awake.",
         "attack_strength": 2,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 sword of light strikes down from the heavens.",
         "ability_count": 1,
         "kills_to_level": 50
@@ -138,7 +138,7 @@
         "story": "She asked, \"Could you tell me where the king is, please? I have to kill him.\" Rather taken back, the dragon replies, \"I’ve already eaten him.\" Hearing this, the little girl bow politely and said \"Thank you very much!\" Puzzled by her appreciation, the dragon asked, \"Why do you thank me, little girl?\"",
         "attack_strength": 4,
         "weight": "Light",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "3 swords of light strike down from the heavens.",
         "ability_count": 3,
         "kills_to_level": 100
@@ -148,7 +148,7 @@
         "story": "The girl replied, \"The king you ate was not the true king. My dead mummy told me that he took the palace from my daddy. That’s why I had to kill him – to get my palace back!\" The little girl wasn’t lying either. She really was the rightful heir to the throne.",
         "attack_strength": 5,
         "weight": "Light",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "4 swords of light strike down from the heavens.",
         "ability_count": 4,
         "kills_to_level": 150
@@ -158,13 +158,14 @@
         "story": "The girl continued, \"Now I’m Queen, I’m going to kill all the people who let my daddy die!\" The dragon laughed and said,\" Very well, little Queen. Then I shall bestow my power upon you and your sword.\" So they exchanged their beating hearts. Then the little girl took her sword, slaughtered everyone, and lived happily ever after.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "8 swords of light strike down from the heavens.",
         "ability_count": 8
       }
     ]
   },
   "kingsblood": {
+    "wpnname": "Kingsblood",
     "ability_name": "Thor's Flame",
     "type": [
       "one_handed_sword"
@@ -174,12 +175,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Kingsblood",
         "level": 1,
         "story": "In ancient times, this black sword once belonged to a mighty king who built a\nglorious empire. Under his wise and just rule, the empire thrived and\nprospered, and knew no equal.",
         "attack_strength": 16,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 magic shaft pierces the ground and conflagrates all those who venture near.",
         "ability_count": 1,
         "kills_to_level": 400
@@ -189,7 +189,7 @@
         "story": "But a ripened fruit can only rot. Spoilt by their wealth and prosperity, the\nservants of the king began to swell with pride--and fell into corruption and\ndepravity.",
         "attack_strength": 22,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "4 magic shafts pierce the ground and conflagrate all those who venture near.",
         "ability_count": 4,
         "kills_to_level": 600
@@ -199,7 +199,7 @@
         "story": "Powerless to cease the rot, the king's summoned a wicked god into the blade of his sword. He then began to murder his treacherous vassals one after another.",
         "attack_strength": 27,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "8 magic shafts pierce the ground and conflagrate all those who venture near.",
         "ability_count": 8,
         "kills_to_level": 800
@@ -209,13 +209,14 @@
         "story": "The god inside the blade reveled in the bloodbath. When only the king himself remained, the sword slew him as well, and the silver blade was dyed by the royal blood.",
         "attack_strength": 32,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "12 magic shafts pierce the ground and conflagrate all those who venture near.",
         "ability_count": 12
       }
     ]
   },
   "hunters_joy": {
+    "wpnname": "Hunter's Joy",
     "ability_name": "Gyllir's Hoof",
     "type": [
       "one_handed_sword"
@@ -225,12 +226,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Hunter's Joy",
         "level": 1,
         "story": "In a certain country lived a feudal lord. This lord was enamored of the hunt; each day he rode out to find animals to slay, his favourite hunting sword by his side.",
         "attack_strength": 2,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 shock wave pulses through the ground and explodes upwards.",
         "ability_count": 1,
         "kills_to_level": 50
@@ -240,7 +240,7 @@
         "story": "One evening, the animals of the forest gathered together in council. \"We cannot survive much longer! We must kill the lord if we wish to live!\"",
         "attack_strength": 4,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "2 shock waves pulse through the ground and explode upward.",
         "ability_count": 2,
         "kills_to_level": 100
@@ -250,7 +250,7 @@
         "story": "So the animals of the forest surrounded the lord's manor, seeking a way in. But when the lord saw them all, he danced with delight. \"So, they have all gathered for the hunt!\"",
         "attack_strength": 5,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "3 shock waves pulse through the ground and explode upward.",
         "ability_count": 3,
         "kills_to_level": 150
@@ -260,13 +260,14 @@
         "story": "With joy coursing through his veins, the lord rode out and slaughtered all the animals till not one remained in the forest. By the by, the lord lived\nhappily on to a ripe old age.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "5 shock waves pulse through the ground and explode upward.",
         "ability_count": 5
       }
     ]
   },
   "scream": {
+    "wpnname": "Scream",
     "ability_name": "Faerie Horn",
     "type": [
       "one_handed_sword"
@@ -276,12 +277,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Scream",
         "level": 1,
         "story": "There was once a handsome young man who stole from village to village, seducing the maidens and promising his hand in marriage.",
         "attack_strength": 7,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 faerie spins about Caim for 10 seconds.",
         "ability_count": 1,
         "ability_sec": 10,
@@ -292,7 +292,7 @@
         "story": "Captivated by his charm and beauty, the young women gave him their land, their gold, their livestock, and their hearts. But at one midsummer festival, his victims met and discovered the young man's faruds.",
         "attack_strength": 8,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "2 faeries spin about Caim for 10 seconds.",
         "ability_count": 2,
         "ability_sec": 10,
@@ -303,7 +303,7 @@
         "story": "The incensed women vowed revenge. With the help of the King of the Faeries, they cast a cruse on the youth, dooming the suitor's still-living soul to be sealed within this sword.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "3 faeries spin about Caim for 10 seconds.",
         "ability_count": 3,
         "ability_sec": 10,
@@ -314,7 +314,7 @@
         "story": "Even now, from deep within the cold steel of the blade, you can hear the\npitiful screams of the young man as he laments his callous crimes.",
         "attack_strength": 16,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "4 faeries spin about Caim for 15 seconds.",
         "ability_count": 4,
         "ability_sec": 15
@@ -322,6 +322,7 @@
     ]
   },
   "ravenfeeder": {
+    "wpnname": "Ravenfeeder",
     "ability_name": "Breath of the Aesir",
     "type": [
       "one_handed_sword"
@@ -331,12 +332,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Ravenfeeder",
         "level": 1,
         "story": "A circular-bladed sword owned by a noble family that lived deep within a great forest. It was said that the user of this weapon would be blessed by the gods with three lives.",
         "attack_strength": 7,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "For 10 seconds, runes of the gods swirl around Caim and make him invincible.",
         "ability_sec": 10,
         "kills_to_level": 300
@@ -346,7 +346,7 @@
         "story": "The sword was originally designed as a tool for torture. Its outer blade is\nsharp enough to bisect a man with one stroke, while the inner is kept dull\nto inflict hideous pain.",
         "attack_strength": 11,
         "weight": "Light",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "For 15 seconds, runes of the gods swirl around Caim and make him invincible.",
         "ability_sec": 15,
         "kills_to_level": 400
@@ -356,7 +356,7 @@
         "story": "Poison can be poured into the handle. As soon as the victim is cut, the poison\nflows into the wound and causes nearly instantaneous death.\n",
         "attack_strength": 14,
         "weight": "Light",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "For 25 seconds, runes of the gods swirl around Caim and make him invincible.",
         "ability_sec": 25,
         "kills_to_level": 600
@@ -366,13 +366,14 @@
         "story": "So cruel was this weapon judged to be, it was banned by the old kings. Soon thereafter, it became infamous as the tool of assassins.",
         "attack_strength": 19,
         "weight": "Light",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "For 30 seconds, runes of the gods swirl around Caim and make him invincible.",
         "ability_sec": 30
       }
     ]
   },
   "dragonhook": {
+    "wpnname": "Dragonhook",
     "ability_name": "Ironfall",
     "type": [
       "one_handed_sword"
@@ -382,12 +383,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Dragonhook",
         "level": 1,
         "story": "An imperial archaeologist unearthed this weapon's blade from the ruins of an ancient holy place. Believed to be fossilized remains of some beast, the substance was incredibly hard.",
         "attack_strength": 13,
         "weight": "Moderate",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 great boulder of iron crashes to the earth.",
         "ability_count": 1,
         "kills_to_level": 400
@@ -397,7 +397,7 @@
         "story": "With great care and reverence, the scientist tried to sharpen the rock. But the substance was impervious to fire, to acid, and to all the tools of his workshop.",
         "attack_strength": 20,
         "weight": "Light",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "3 great boulders of iron crash to the earth.",
         "ability_count": 3,
         "kills_to_level": 500
@@ -407,7 +407,7 @@
         "story": "Driven mad by the unyielding substance that say reproachfully before him, the scientist smashed it against his head again and again till he fell dead of his wounds.",
         "attack_strength": 25,
         "weight": "Light",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "6 great boulders of iron crash to the earth.",
         "ability_count": 6,
         "kills_to_level": 700
@@ -417,13 +417,14 @@
         "story": "The darkly glimmering subsstance was the claw of an earth dragon, and only human blood can sharpen its edge. And so for ignorance did another scientist die.",
         "attack_strength": 29,
         "weight": "Light",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "8 great boulders of iron crash to the earth.",
         "ability_count": 8
       }
     ]
   },
   "maidens_kris": {
+    "wpnname": "Maiden's Kris",
     "ability_name": "Crescentsong",
     "type": [
       "one_handed_sword"
@@ -433,12 +434,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Maiden's Kris",
         "level": 1,
         "story": "When the great shrine was built, young women were chosen to be sacrifices.\nThey plunged this kris sword into their own hearts. The blade glimmers with\nthe souls of its young victims.",
         "attack_strength": 3,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 crescent blade of light flies at the enemy.",
         "ability_count": 1,
         "kills_to_level": 200
@@ -448,7 +448,7 @@
         "story": "The first sacrifice was a respected and pious believer. The pure woman was\nchosen to serve as the foundation stone of the new shrine.",
         "attack_strength": 6,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "3 crescent blades of light fly at the enemy.",
         "ability_count": 3,
         "kills_to_level": 300
@@ -458,7 +458,7 @@
         "story": "The second sacrifice was a kind girl of the village. Though sad to be chosen\nfor death, she consoled herself with the knowledge that her sacrifice would\nhelp others.",
         "attack_strength": 8,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "5 crescent blades of light fly at the enemy.",
         "ability_count": 5,
         "kills_to_level": 600
@@ -468,13 +468,14 @@
         "story": "The third sacrifice was a girl who made her living as a thief. She cursed the\ngods angrily as her life was taken. At the moment the sword struck home, it\ncoiled and writhed like a wounded snake.",
         "attack_strength": 14,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "9 crescent blades of light fly at the enemy.",
         "ability_count": 9
       }
     ]
   },
   "swordsmasher": {
+    "wpnname": "Swordsmasher",
     "ability_name": "Pale Death",
     "type": [
       "one_handed_sword"
@@ -484,12 +485,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Swordsmasher",
         "level": 1,
         "story": "A sword serrated like a saw, able to cut through enemy weapons. But with each use, vibrations shake the user's arm, causing the flesh to turn weak and translucent like wax.",
         "attack_strength": 7,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "Caim turns invisible for 10 seconds and his attack strength increases by a factor of 1.5.",
         "ability_sec": 10,
         "ability_atk_multi": 1.5,
@@ -500,7 +500,7 @@
         "story": "Many, many centuries ago, there was a brave knight who fought and defeated countless enemies. But as he fought, his flesh became paler and paler.",
         "attack_strength": 11,
         "weight": "Light",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "Caim turns invisible for 15 seconds and his attack strength increases by a factor of 2.",
         "ability_sec": 15,
         "ability_atk_multi": 2,
@@ -511,7 +511,7 @@
         "story": "Then came a war on which the fate of the kingdom hung in balance. The knight took the head of the enemy general and won the battle. But he had grown so pale as to be transparent.",
         "attack_strength": 14,
         "weight": "Light",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "Caim turns invisible for 20 seconds and his attack strength increases by a factor of 2.5.",
         "ability_sec": 20,
         "ability_atk_multi": 2.5,
@@ -522,7 +522,7 @@
         "story": "As the soldiers celebrated the victory, a single arrow struck the knight through his heart. But none could see the invisible knight, and his death\nwent noticed by none.\n",
         "attack_strength": 19,
         "weight": "Light",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "Caim turns invisible for 25 seconds and his attack strength increases by a factor of 3.",
         "ability_sec": 25,
         "ability_atk_multi": 3
@@ -530,6 +530,7 @@
     ]
   },
   "moonfire": {
+    "wpnname": "Moonfire",
     "ability_name": "Fang of the Ifrit",
     "type": [
       "two_handed_sword"
@@ -539,52 +540,48 @@
     ],
     "levels": [
       {
-        "wpnname": "Moonfire",
         "level": 1,
         "story": "This sword is forged of a granite that burns red with eternal heat. Only those who enjoy the protection of the moon god, ruler of the cool night, may dare grasp the handle.",
         "attack_strength": 16,
         "weight": "Moderate",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 giant pillar of flame erupts)from the earth.",
         "ability_count": 1,
-        "kills_to_level": 400,
-        "IMG": "https://static.wikia.nocookie.net/drakengard/images/1/11/Moonfire_%28Drakengard%29_Level_1.png/revision/latest?cb=20210924165952"
+        "kills_to_level": 400
       },
       {
         "level": 2,
         "story": "Legend tells of a great warrior who carried this sword into battle. Roaring a battle cry, he charged into the fray, where a hundred enemy archers struck him through with a thousand arrows.",
         "attack_strength": 22,
         "weight": "Moderate",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "4 giant pillars of flame erupt from the earth.",
         "ability_count": 4,
-        "kills_to_level": 600,
-        "IMG": "https://static.wikia.nocookie.net/drakengard/images/5/52/Moonfire_%28Drakengard%29_Level_2.png/revision/latest?cb=20210924170004"
+        "kills_to_level": 600
       },
       {
         "level": 3,
         "story": "Yet not a drop of blood flowed from his wounds, and though arrows pierced his heart, his strength failed him not. His army was the victor on that day.",
         "attack_strength": 27,
         "weight": "Moderate",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "6 giant pillars of flame erupt from the earth.",
         "ability_count": 6,
-        "kills_to_level": 800,
-        "IMG": "https://static.wikia.nocookie.net/drakengard/images/1/1d/Moonfire_%28Drakengard%29_Level_3.png/revision/latest?cb=20210924170019"
+        "kills_to_level": 800
       },
       {
         "level": 4,
         "story": "With the battle won, the warrior returned to camp. But in the instant he laid down his sword, he froze as cold and as still as ice. The protection of the moon god had finally claimed his life.",
         "attack_strength": 32,
         "weight": "Moderate",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "12 giant pillars of flame erupt from the earth.",
-        "ability_count": 12,
-        "IMG": "https://static.wikia.nocookie.net/drakengard/images/5/59/Moonfire_%28Drakengard%29_Level_4.png/revision/latest?cb=20210924170036"
+        "ability_count": 12
       }
     ]
   },
   "slaughterism": {
+    "wpnname": "Slaughterism",
     "ability_name": "Thunderclaw",
     "type": [
       "two_handed_sword"
@@ -594,12 +591,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Slaughterism",
         "level": 1,
         "story": "This sword belonged to a demented painter who murdered innocents every night and collected their blood. With this grisly harvest, he painted masterpieces the likes of which the world had never seen.",
         "attack_strength": 16,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "1 bolt of lightning smites down from storm clouds above.",
         "ability_count": 1,
         "kills_to_level": 400
@@ -609,7 +605,7 @@
         "story": "The painter had a dream. He dreamt that one day he would create paintings so powerful that all who viewed them would be at peace. Each day he painted feverishly, chasing his dream.",
         "attack_strength": 22,
         "weight": "Moderate",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "4 bolts of lightning smite down from storm clouds above.",
         "ability_count": 4,
         "kills_to_level": 600
@@ -619,7 +615,7 @@
         "story": "But none cared for his work, and he began to feel the cold, uncaring stares of others. Eventually, the soul of the sensitive artist was broken.",
         "attack_strength": 27,
         "weight": "Moderate",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "8 bolts of lightning smite down from storm clouds above.",
         "ability_count": 8,
         "kills_to_level": 800
@@ -629,13 +625,14 @@
         "story": "\"Red! Crimson! Scarlet!\" In a frenzy, the artist embarked on a rampage of murder and creation. It did not end until he turned the sword on himself and forged his last masterpiece.",
         "attack_strength": 32,
         "weight": "Moderate",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "16 bolts of lightning smite down from storm clouds above.",
         "ability_count": 16
       }
     ]
   },
   "soldiers_sword": {
+    "wpnname": "Soldier's Sword",
     "ability_name": "Breath of Sleipner",
     "type": [
       "two_handed_sword"
@@ -645,12 +642,11 @@
     ],
     "levels": [
       {
-        "wpnname": "Soldier's Sword",
         "level": 1,
         "story": "A sword forged using secret techniques known only to one family. The family's secret was jealously guarded, and no stranger was allowed to learn it.",
         "attack_strength": 4,
         "weight": "Light",
-        "MP_cost": 5,
+        "mp_cost": 5,
         "ability_desc": "For 10 seconds, a magic shield envelops Caim, allowing him to move at great speed.",
         "ability_sec": 10,
         "ability_speed_multi": 1.25,
@@ -661,7 +657,7 @@
         "story": "Hoping to discover how the sword was made, a soldier from an enemy kingdom joined the family. His plan was to steal the secret and return it to his own country.",
         "attack_strength": 10,
         "weight": "Light",
-        "MP_cost": 10,
+        "mp_cost": 10,
         "ability_desc": "For 15 seconds, a magic shield envelops Caim, allowing him to move at great speed.",
         "ability_sec": 15,
         "ability_speed_multi": 1.5,
@@ -672,7 +668,7 @@
         "story": "But the young soldier fell in love with the family's daughter, and he could not bear to part from her. He confessed his plot, and begged her to flee with him back to his country.",
         "attack_strength": 12,
         "weight": "Light",
-        "MP_cost": 15,
+        "mp_cost": 15,
         "ability_desc": "For 15 seconds, a magic shield envelops Caim, allowing him to move at blazing speed.",
         "ability_sec": 15,
         "ability_speed_multi": 2,
@@ -683,1638 +679,10 @@
         "story": "But when the daughter heard his scheme, she murdered the soldier and then took her own life. And so was the secret of the sword kept within the family.",
         "attack_strength": 15,
         "weight": "Light",
-        "MP_cost": 20,
+        "mp_cost": 20,
         "ability_desc": "For 15 seconds, a magic shield envelops Caim, allowing him to move at unholy speed.",
         "ability_sec": 15,
         "ability_speed_multi": 2.5
-      }
-    ]
-  },
-  "skalds_song": {
-    "ability_name": "Crimson Sentinel",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Skald's Song",
-        "level": 1,
-        "attack_strength": 4,
-        "weight": "Moderate"
-      },
-      {
-        "level": 2,
-        "attack_strength": 10,
-        "weight": "Moderate"
-      },
-      {
-        "level": 3,
-        "attack_strength": 12,
-        "weight": "Moderate"
-      },
-      {
-        "level": 4,
-        "attack_strength": 15,
-        "weight": "Moderate"
-      }
-    ]
-  },
-  "guardians_sorrow": {
-    "ability_name": "Cherub's Breath",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Guardian's Sorrow",
-        "level": 1,
-        "attack_strength": 9,
-        "weight": "Moderate"
-      },
-      {
-        "level": 2,
-        "attack_strength": 16,
-        "weight": "Moderate"
-      },
-      {
-        "level": 3,
-        "attack_strength": 20,
-        "weight": "Moderate"
-      },
-      {
-        "level": 4,
-        "attack_strength": 23,
-        "weight": "Moderate"
-      }
-    ]
-  },
-  "injustice": {
-    "ability_name": "Voice of Gungnir",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Injustice",
-        "level": 1,
-        "attack_strength": 9,
-        "weight": "Light"
-      },
-      {
-        "level": 2,
-        "attack_strength": 16,
-        "weight": "Light"
-      },
-      {
-        "level": 3,
-        "attack_strength": 20,
-        "weight": "Light"
-      },
-      {
-        "level": 4,
-        "attack_strength": 23,
-        "weight": "Light"
-      }
-    ]
-  },
-  "hymirs_finger": {
-    "ability_name": "Mizzle of Tears",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Hymir's Finger",
-        "level": 1,
-        "attack_strength": 52,
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 2,
-        "attack_strength": 57,
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 3,
-        "attack_strength": 60,
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 4,
-        "attack_strength": 62,
-        "weight": "Very Heavy"
-      }
-    ]
-  },
-  "flamberge": {
-    "ability_name": "Dragonspeak",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Flamberge",
-        "level": 1,
-        "attack_strength": 10,
-        "weight": "Light"
-      },
-      {
-        "level": 2,
-        "attack_strength": 14,
-        "weight": "Light"
-      },
-      {
-        "level": 3,
-        "attack_strength": 17,
-        "weight": "Light"
-      },
-      {
-        "level": 4,
-        "attack_strength": 23,
-        "weight": "Light"
-      }
-    ]
-  },
-  "nobuyoshi": {
-    "ability_name": "Susano's Veil",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Nobuyoshi",
-        "level": 1,
-        "attack_strength": 10,
-        "weight": "Light"
-      },
-      {
-        "level": 2,
-        "attack_strength": 14,
-        "weight": "Light"
-      },
-      {
-        "level": 3,
-        "attack_strength": 17,
-        "weight": "Light"
-      },
-      {
-        "level": 4,
-        "attack_strength": 23,
-        "weight": "Light"
-      }
-    ]
-  },
-  "takamasa": {
-    "ability_name": "Breath of Amaterasu",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Takamasa",
-        "level": 1,
-        "attack_strength": 16,
-        "weight": "Light",
-        "ability_desc": "A curtain of fire envelops Caim for 10 seconds, and his attack strength increases by a factor of 1.5.",
-        "ability_sec": 10,
-        "ability_atk_multi": 1.5
-      },
-      {
-        "level": 2,
-        "attack_strength": 22,
-        "weight": "Light",
-        "ability_desc": "A curtain of fire envelops Caim for 15 seconds, and his attack strength increases by a factor of 2.",
-        "ability_sec": 15,
-        "ability_atk_multi": 2
-      },
-      {
-        "level": 3,
-        "attack_strength": 27,
-        "weight": "Light",
-        "ability_desc": "A curtain of fire envelops Caim for 20 seconds, and his attack strength increases by a factor of 2.5.",
-        "ability_sec": 20,
-        "ability_atk_multi": 2.5
-      },
-      {
-        "level": 4,
-        "attack_strength": 32,
-        "weight": "Light",
-        "ability_desc": "A curtain of fire envelops Caim for 25 seconds, and his attack strength increases by a factor of 3.",
-        "ability_sec": 25,
-        "ability_atk_multi": 3
-      }
-    ]
-  },
-  "greeds_reward": {
-    "ability_name": "Voice of Balam",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Greed's Reward",
-        "level": 1,
-        "story": "There was once a great merchant who sailed all the seven seas, discovering new lands and trading around the world. This merchant amassed a fortune beyond all compare.",
-        "attack_strength": 7,
-        "weight": "Moderate",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "One day, the merchant heard of an enchanted weapon known to some as the Dark Summoner. It was said that this sword was hidden in the ocean to the south--a land swallowed in ages past.",
-        "attack_strength": 11,
-        "weight": "Moderate",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "The merchant set out, resolved to find the rare and valuable sword. After many adventures and much hardship, he found it at last; the sword was impaled in the mouth of a demon's statue.",
-        "attack_strength": 14,
-        "weight": "Moderate",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "Suddenly bolts of hellfire flew from the sword, and the merchant's ship sank into the watery abyss. Weeks later, his corpse was washed up upon the shore, the scimitar clutched reproachfully in his hand.",
-        "attack_strength": 19,
-        "weight": "Moderate",
-        "ability_desc": "5 small fire-orbs seek out targets.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "writheheart": {
-    "ability_name": "Stricken Soul",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Writheheart",
-        "level": 1,
-        "story": "In the twisted, misshapen blade of this sword lies an evil curse. Within it is\nthe hate of the woman who used it to slay herself--and the lover who betrayed\nher.",
-        "attack_strength": 3,
-        "weight": "Light",
-        "ability_desc": "1 pluse of plasma is hurled outwards and seeks targets",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "All who take up this sword are bewitched, and against their own will they find\nthey must slaughter others without mercy. Only by cutting their own arm can\nthe curse be broken.",
-        "attack_strength": 6,
-        "weight": "Moderate",
-        "ability_desc": "3 pulses of plasma are hurled outward and seek targets.",
-        "ability_count": 3
-      },
-      {
-        "level": 3,
-        "story": "When a victim cuts off his arm, his soul becomes a part of the blade. He is\nable to wield it with nothing but the power of his own thoughts.",
-        "attack_strength": 8,
-        "weight": "Moderate",
-        "ability_desc": "5 pulses of plasma are hurled outward and seek targets.",
-        "ability_count": 5
-      },
-      {
-        "level": 4,
-        "story": "Only one other way exists to break the curse of the sword: If the spirit of\nthe girl were to fall in love with the wielder, then she would lift the spell.\nBut no man has yet won her love.",
-        "attack_strength": 14,
-        "weight": "Moderate",
-        "ability_desc": "7 pulses of plasma are hurled outward and seek targets.",
-        "ability_count": 7
-      }
-    ]
-  },
-  "demonbane": {
-    "ability_name": "Skoll's Feast",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Demonbane",
-        "level": 1,
-        "story": "This sword was forged as an instrument of revenge by a swordsmith whose family was slain by demons. It sucks in the souls of its victims to grow stronger and stronger.",
-        "attack_strength": 13,
-        "weight": "Moderate"
-      },
-      {
-        "level": 2,
-        "story": "The skilled swordsmith was commanded by the king to make a sword to behead demons. But as he struggled to craft the famous weapon, demons appeared at his home.",
-        "attack_strength": 20,
-        "weight": "Moderate"
-      },
-      {
-        "level": 3,
-        "story": "The demons, enraged that such a sword was being made and determined none should ever wield it, slaughtered the swordsmith's family and left him alive to weep over their bloody remains.",
-        "attack_strength": 25,
-        "weight": "Moderate"
-      },
-      {
-        "level": 4,
-        "story": "Burning with revenge, the swordsmith left the corpses where they lay and crafted the demon-slayer. But the madman who gripped the weapon was little more than a demon himself.",
-        "attack_strength": 29,
-        "weight": "Moderate"
-      }
-    ]
-  },
-  "caims_sword": {
-    "ability_name": "Cometdance",
-    "type": [
-      "two_handed_sword"
-    ],
-    "game": [
-      "Drakengard",
-      "Drakengard 2",
-      "Drakengard 3"
-    ],
-    "levels": [
-      {
-        "wpnname": "Caim's Sword",
-        "level": 1,
-        "story": "A gift to Caim from his beloved father. Since he was a young child, Caim had idolized his gentle father and longed to fight strongly and bravely in battle beside him.",
-        "attack_strength": 3,
-        "weight": "Moderate",
-        "MP_cost": 5,
-        "kills_to_level": 200,
-        "IMG": "https://static.wikia.nocookie.net/drakengard/images/5/53/Caim%27s_Sword_%28Drakengard%29.png/revision/latest?cb=20210913164824"
-      },
-      {
-        "level": 2,
-        "story": "But the dark shadow of the Empire fell over their peaceful kingdom. The Empire grew stronger and stronger, until one day, Caim's castle was attacked by Imperial black dragons.",
-        "attack_strength": 6,
-        "weight": "Moderate",
-        "MP_cost": 10,
-        "kills_to_level": 300
-      },
-      {
-        "level": 3,
-        "story": "\"Caim! Take Furiae and flee!\" So ordered Caim's father. But even before Caim was able to answer, his parents were slain before his very eyes.",
-        "attack_strength": 8,
-        "weight": "Moderate",
-        "MP_cost": 15,
-        "kills_to_level": 600
-      },
-      {
-        "level": 4,
-        "story": "Clutching the sword that was a gift from his father, Caim swore upon it revenge for the loss of his kingdom and the murder of his parents. Even now, an unquenchable rage still fills his heart.",
-        "attack_strength": 14,
-        "weight": "Moderate",
-        "MP_cost": 20
-      }
-    ]
-  },
-  "stormgiver": {
-    "ability_name": "Surt's Touch",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Stormgiver",
-        "level": 1,
-        "story": "There once was a nest of vampyres that lived in an old castle deep in the forest. Each night, the vampyres would creep out their lair and terrorize the helpless farmers of the nearby village.",
-        "attack_strength": 16,
-        "weight": "Moderate",
-        "ability_desc": "1 lightning orb flies at the enemy.",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "Hearing of the villagers' plight, a renowned vampyre slayer came to the village. But he told the villagers that he could not battle an entire nest of vampyres alone.",
-        "attack_strength": 22,
-        "weight": "Moderate",
-        "ability_desc": "3 lightning orbs fly at the enemy.",
-        "ability_count": 3
-      },
-      {
-        "level": 3,
-        "story": "Some young men of the village volunteered to help, and together they prepared four spears set with powerful crystals. That night, the vampyres came shrieking from their lair and attacked the village as one.",
-        "attack_strength": 27,
-        "weight": "Moderate",
-        "ability_desc": "4 lightning orbs fly at the enemy.",
-        "ability_count": 4
-      },
-      {
-        "level": 4,
-        "story": "The battle raged all night long. But when morning broke, all that remained of the vampyres was gray ash. Ever since, the villagers have worshiped the spears as guardian spirits.",
-        "attack_strength": 32,
-        "weight": "Moderate",
-        "ability_desc": "6 lightning orbs fly at the enemy.",
-        "ability_count": 6
-      }
-    ]
-  },
-  "robber_king": {
-    "ability_name": "Orion's Dart",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard",
-      "Drakengard 2",
-      "Drakengard 3",
-      "NieR:Automata",
-      "NieR"
-    ],
-    "levels": [
-      {
-        "wpnname": "Robber King",
-        "level": 1,
-        "story": "In a kingdom of the Union, a general beloved by the common people slew the wicked queen that had taken power when the king had died.",
-        "attack_strength": 7,
-        "weight": "Moderate",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "The general came from the lowest classes, making a living as a murderer and highwayman. After killing his fifteenth victim, he was at last captured by the authorities.",
-        "attack_strength": 11,
-        "weight": "Moderate",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "Judgement was swift; the sentence was death. But the general had a great advantage--he was an extraordinarily handsome man. When the queen saw him, she could not bear to have him killed.",
-        "attack_strength": 14,
-        "weight": "Moderate",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "She gave the general all her love, but her love turned to obsession. She became his prisoner, and he took her throne. People who knew him came to call him Robber King.",
-        "attack_strength": 19,
-        "weight": "Moderate",
-        "ability_desc": "5 arrows of lightning are hurled at the enemy.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "knights_vow": {
-    "ability_name": "Ullr's Bolt",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Knight's Vow",
-        "level": 1,
-        "story": "A long time ago, there was a dragon who could not fly. This gruff yet noble- hearted dragon had never seen a human until the day he came across a gravely injured knight.",
-        "attack_strength": 9,
-        "weight": "Heavy",
-        "ability_desc": "1 dagger of ice is hurled out in front of Caim.",
-        "ability_count": 1,
-        "kills_to_level": 200
-      },
-      {
-        "level": 2,
-        "story": "The dragon tended to the knight, but when the human opened his eyes, he stared in fright and tried to flee. In those days, wingless dragons were despised by men as ill omens.",
-        "attack_strength": 18,
-        "weight": "Heavy",
-        "ability_desc": "2 daggers of ice are hurled out in front of Caim.",
-        "ability_count": 2,
-        "kills_to_level": 300
-      },
-      {
-        "level": 3,
-        "story": "But the knight recovered, and vowed as he returned home to repay the dragon. Many years passed. One day, the aged dragon found himself surrounded by an army of men, and he prepared himself for death.",
-        "attack_strength": 21,
-        "weight": "Heavy",
-        "ability_desc": "3 daggers of ice are hurled out in all directions.",
-        "ability_count": 3,
-        "kills_to_level": 400
-      },
-      {
-        "level": 4,
-        "story": "\"My wingless friend! It has been a long time!\" Striding from behind the soldiers came the knight of old, now a king with an army of thousands. The dragon let out a roar of delight.",
-        "attack_strength": 23,
-        "weight": "Heavy",
-        "ability_desc": "5 daggers of ice are hurled in all directions.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "balberiths_tears": {
-    "ability_name": "Eye of the Jinn",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Balberith's Tears",
-        "level": 1,
-        "story": "Balberith is the demon who seals all pacts between devils and humans. His evil contracts sends ill-fortuned men and women one after the other into hell.",
-        "attack_strength": 43,
-        "weight": "Heavy",
-        "ability_desc": "1 cyclone of the storm is summoned.",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "One time, Balberith fell in love with a human woman. This woman's father was very sick, and she appealed to the demons to save her father.",
-        "attack_strength": 46,
-        "weight": "Heavy",
-        "ability_desc": "2 cyclones of the storm are summoned.",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "But Balberith knew that with a contract, she would be thrown into hell and lost to him forever. He thought and thought, and at last decided that he himself would go to hell in her place.",
-        "attack_strength": 48,
-        "weight": "Heavy",
-        "ability_desc": "3 cyclones of the storm are summoned.",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "But when he hurried to the girl's home, he found the father dead; the girl's lifeless body lay beside him, as if in sleep. Ignorant of death, the demon tried to shake her awake, over and over again.",
-        "attack_strength": 54,
-        "weight": "Heavy",
-        "ability_desc": "4 cyclones of the storm are summoned.",
-        "ability_count": 4
-      }
-    ]
-  },
-  "broken_dogma": {
-    "ability_name": "Undead Sigh",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Broken Dogma",
-        "level": 1,
-        "story": "There was once a great sect that boasted 246 shrines and centuries of devotion to the holy way. The continuation of the sect's sacred truth was entrusted to the great hierarch, 57th in the line.",
-        "attack_strength": 16,
-        "weight": "Heavy",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "The hierarch was a grave and frankly honest leader; upstanding as a child of the gods, he was a good and holy man. But at times, his honesty made him weak to the pressures of the secular world.",
-        "attack_strength": 22,
-        "weight": "Heavy",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "One day, the ruler of the kingdom and protector of the sect asked the holy leader, \"Who is the more just, the gods or I?\" The hierarch answered that the gods were, and the king became enraged.",
-        "attack_strength": 27,
-        "weight": "Heavy",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "The king decreed the sect a heresy, and in one stroke. the proud, centuries- old religion was snuffed out. The hierarch, seeing his entreaties fall on deaf ears, plunged this trident into his breast.",
-        "attack_strength": 32,
-        "weight": "Heavy",
-        "ability_desc": "5 clouds of icy vapor are hurled forth.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "battlelust": {
-    "ability_name": "Sin's Weight",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard",
-      "NieR"
-    ],
-    "levels": [
-      {
-        "wpnname": "Battlelust",
-        "level": 1,
-        "story": "The leader of warriors seeks out their death",
-        "weight": "Heavy",
-        "ability_desc": "1 lethal gravity orb is summoned.",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "Deep in his heart fall the tears of heaven",
-        "weight": "Heavy",
-        "ability_desc": "3 lethal gravity orbs are summoned.",
-        "ability_count": 3
-      },
-      {
-        "level": 3,
-        "story": "The lakes of blood gilmmer like beacons in the dark",
-        "weight": "Heavy",
-        "ability_desc": "5 lethal gravity orbs are summoned.",
-        "ability_count": 5
-      },
-      {
-        "level": 4,
-        "story": "The lesson steals life and blesses it anew",
-        "attack_strength": 44,
-        "weight": "Heavy",
-        "ability_desc": "9 lethal gravity orbs are summoned.",
-        "ability_count": 9
-      }
-    ]
-  },
-  "victors_spoils": {
-    "ability_name": "Seraph's Touch",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard",
-      "Drakengard 2"
-    ],
-    "levels": [
-      {
-        "wpnname": "Victor's Spoils",
-        "level": 1,
-        "story": "There was once a country founded by two brothers, masters of martial arts. One brother fought with strength, the other with speed. Great friends, they ruled their country in peace.",
-        "weight": "Heavy"
-      },
-      {
-        "level": 2,
-        "story": "One day, a small girl asked the two brothers an innocent question: \"They say that the two of you have never fought. But if you were to have a fight, which one of you could win?\"",
-        "weight": "Heavy"
-      },
-      {
-        "level": 3,
-        "story": "Both answered that he himself would be the victor. Thereupon the brothers began to argue--an argument that grew more and more heated, until they found themselves in a fight to death.",
-        "weight": "Heavy"
-      },
-      {
-        "level": 4,
-        "story": "Seeing the brother's battle, the angry gods hurled down this mighty spear and impaled them both. Awed by the gods' wrath, the people of the country enshrined the spear in their temple.",
-        "attack_strength": 19,
-        "weight": "Heavy",
-        "ability_desc": "8 comets of flame whirl around Caim in a widening gyre.",
-        "ability_count": 8
-      }
-    ]
-  },
-  "wolfs_plague": {
-    "ability_name": "Fenrir's Fang",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Wolf's Plague",
-        "level": 1,
-        "story": "There was once a small village that made its livelihood from rearing cattle. But it was terrorized by a pack of wolves that slaughtered the villagers' livestock each and every night.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 2,
-        "story": "Desperately, the villagers tried to protect their herds, but they were defenseless against the wily white wolf that led the pack. Each night, more livestock was lost.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 3,
-        "story": "As the situation grew more grave, some began to talk of abandoning their homes. At that, the quietest villager of all took up his spear and stepped out into the night.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 4,
-        "story": "Two days later, the white wolf was found dead in the woods, impaled by the spear. The villagers raised the weapon over the village gate in hope that one day it might greet the silent one's return.",
-        "attack_strength": 35,
-        "weight": "Very Heavy",
-        "ability_desc": "8 fists of ice burst from the ground.",
-        "ability_count": 8
-      }
-    ]
-  },
-  "ozymandiass_might": {
-    "ability_name": "Lightning Strife",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Ozymandias's Might",
-        "level": 1,
-        "story": "This monk's spade was owned by the ruler of the greatest empire of the age. Said to control lightning and slice through blackness, it was dedicated as a guardian weapon in the shrine of the gods.",
-        "weight": "Very Heavy",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "A warrior famed for his courage plundered the weapon and set out to conquer the world. Summoning lightning and thunder to his aid, he brought nation after nation into his empire.",
-        "weight": "Very Heavy",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "He sat at the center of a vast empire, but the vassals states chafed under his rule and rose up against him. In the end, betrayed even by his own army, the warrior's empire collapsed.",
-        "weight": "Very Heavy",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "He took refuse in a small castle. As the besieging army put the castle to the torch, he held the monk's spade at his side and, together with his favourite concubine, waited for death.",
-        "attack_strength": 35,
-        "weight": "Very Heavy",
-        "ability_desc": "5 globes of white lightning whirl about Caim.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "mermaids_feast": {
-    "ability_name": "Undine's Sigh",
-    "type": [
-      "spear"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Mermaid's Feast",
-        "level": 1,
-        "story": "This monk's spade belonged to an ugly mermaid who lived on a solitary island in the south ocean. With her fearsome songs, she would lure the islanders out to sea and feast upon their raw livers.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 2,
-        "story": "One day, a young man came to the island, seeking revenge on the mermaid for the slaying of his family. The man sliced off the mermaid's tail, leaving her on the brink of death.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 3,
-        "story": "Unable to swim, the mermaid despaired. Seeking forgiveness, she gave to the youth her beloved weapon and begged for the return of her tail in exchange.",
-        "weight": "Very Heavy"
-      },
-      {
-        "level": 4,
-        "story": "But the youth knew that she would return to her wicked ways of terrorizing the islanders for the livers that gave her sustenance. With one thrust of her own spear, the pitiful creature was slain.",
-        "attack_strength": 20,
-        "weight": "Very Heavy",
-        "ability_desc": "8 spinning spirit claws emerge in the air and then explode",
-        "ability_count": 8
-      }
-    ]
-  },
-  "magis_sorrow": {
-    "ability_name": "Sirensong",
-    "type": [
-      "staff"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Magi's Sorrow",
-        "level": 1,
-        "story": "Far, far to the west was a land of magic, governed in peace by the five hundred wise magi of the Council.",
-        "weight": "Moderate"
-      },
-      {
-        "level": 2,
-        "story": "In both night and day the streets shone, and the people lived free of fear or hard labor. One day, the five-hundred-and-first magi was appointed to the Council.",
-        "weight": "Moderate"
-      },
-      {
-        "level": 3,
-        "story": "He was only a child of ten, but so great were his powers and his intelligence, that within two years and fifteen days, he was made Leader of the Council.",
-        "weight": "Moderate"
-      },
-      {
-        "level": 4,
-        "story": "A genius of magic, but also a boy of twelve. Fears assailed him, and bewildered by a life without meaning, he transformed himself into a crystal that would exist for all eternity.",
-        "attack_strength": 15,
-        "weight": "Moderate",
-        "ability_desc": "10 fountains of incandescence erupt from the ground.",
-        "ability_count": 10
-      }
-    ]
-  },
-  "wisdom": {
-    "ability_name": "Thus Spake the Aesir",
-    "type": [
-      "staff"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Wisdom",
-        "level": 1,
-        "story": "In a northern island country, there was a wise man trusted by all people. Known as the Man Who Can See a Thousand Leagues, he wandered the countryside with this staff in his hand.",
-        "weight": "Moderate",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "The staff could cure diseases and injury in all those who touched it. When placed on the ground, it could make even the most barren lands fertile.",
-        "weight": "Moderate",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "If the staff was touched to a person, it could tell if that person lied or told the truth. If the staff was touched to a wicked man, that man would fall on his knees and repent all his sins.",
-        "weight": "Moderate",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "If the staff was touched to monsters, they would flee. And if the staff was touched to demons, with words forbidden by the gods, burn them to blackened ash.",
-        "attack_strength": 10,
-        "weight": "Moderate",
-        "ability_desc": "5 forbidden runes fly forth and chase down the enemy.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "edacious": {
-    "ability_name": "Silver Solace",
-    "type": [
-      "staff"
-    ],
-    "game": [
-      "Drakengard",
-      "Drakengard 2"
-    ],
-    "levels": [
-      {
-        "wpnname": "Edacious",
-        "level": 1,
-        "story": "This was the staff of a lean, thin wizard. His mean indifference and cold heart heart made him hated by the townspeople and his apprentices.",
-        "weight": "Moderate",
-        "ability_count": 1
-      },
-      {
-        "level": 2,
-        "story": "Growing fearful for his own life, the wizard used the black arts to form a staff with fearsome power--power that drew its energy from the wizard's own life force.",
-        "weight": "Moderate",
-        "ability_count": 2
-      },
-      {
-        "level": 3,
-        "story": "As the staff gathered more and more energy to itself, the wizard grew thinner and weaker. But the wizard was intoxicated by the staff's power, and could not let go, no matter the cost.",
-        "weight": "Moderate",
-        "ability_count": 3
-      },
-      {
-        "level": 4,
-        "story": "Obsessed with protecting himself from his resentful apprentices, the wizard clutched the staff tight till he died. In the end, all that remained of him were brittle bones and dried, translucent skin.",
-        "attack_strength": 14,
-        "weight": "Moderate",
-        "ability_desc": "5 magic coronas of light appear and heal Caim when he is within their circumference.",
-        "ability_count": 5
-      }
-    ]
-  },
-  "philosophers_staff": {
-    "type": [
-      "staff"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Philosopher's Staff",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "lovekeeper": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Lovekeeper",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "crimson hood": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Crimson Hood",
-        "level": 1,
-        "attack_strength": 21
-      },
-      {
-        "level": 2,
-        "attack_strength": 32
-      },
-      {
-        "level": 3,
-        "attack_strength": 38
-      },
-      {
-        "level": 4,
-        "attack_strength": 42
-      }
-    ]
-  },
-  "foul_blade": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Foul Blade",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "bonebreaker": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Bonebreaker",
-        "level": 1,
-        "attack_strength": 7,
-        "kills_to_level": 150
-      },
-      {
-        "level": 2,
-        "attack_strength": 15,
-        "kills_to_level": 200
-      },
-      {
-        "level": 3,
-        "attack_strength": 18,
-        "kills_to_level": 250
-      },
-      {
-        "level": 4,
-        "attack_strength": 20
-      }
-    ]
-  },
-  "poisontongue": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Poisontongue",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "executioners_song": {
-    "type": [
-      "axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Executioner's Song",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "twins_fang": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Twins' Fang",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "sorrowborn": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Sorrowborn",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "widows_death": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Widow's Death",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "fhengs_glaive": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Fheng's Glaive",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "windsinger": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Windsinger",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "devilscale": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Devilscale",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "reapers_scythe": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Reaper's Scythe",
-        "level": 1,
-        "attack_strength": 28
-      },
-      {
-        "level": 2,
-        "attack_strength": 36
-      },
-      {
-        "level": 3,
-        "attack_strength": 42
-      },
-      {
-        "level": 4,
-        "attack_strength": 48
-      }
-    ]
-  },
-  "apostates_misery": {
-    "type": [
-      "pole axe"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Apostate's Misery",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "mages_promise": {
-    "type": [
-      "mace"
-    ],
-    "levels": [
-      {
-        "wpnname": "Mage's Promise",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "carrion_maker": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Carrion-maker",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "holy_mace": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Holy Mace",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "dragonstroke": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Dragonstroke",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "pupils_club": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Pupil's Club",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "spiked_wisdom": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Spiked Wisdom",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "iron_scraps": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Iron Scraps",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "sorrows_companion": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Sorrow's Companion",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "skull_banquet": {
-    "type": [
-      "mace"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Skull Banquet",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "souldouser": {
-    "type": [
-      "hammer"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Souldouser",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "dragonstorm": {
-    "type": [
-      "hammer"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Dragonstorm",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "treasure_builder": {
-    "type": [
-      "hammer"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Treasure Builder",
-        "level": 1
-      },
-      {
-        "level": 2
-      },
-      {
-        "level": 3
-      },
-      {
-        "level": 4
-      }
-    ]
-  },
-  "tyrants_hammer": {
-    "type": [
-      "hammer"
-    ],
-    "game": [
-      "Drakengard"
-    ],
-    "levels": [
-      {
-        "wpnname": "Tyrant's Hammer",
-        "level": 1,
-        "attack_strength": 7,
-        "kills_to_level": 150
-      },
-      {
-        "level": 2,
-        "attack_strength": 15,
-        "kills_to_level": 250
-      },
-      {
-        "level": 3,
-        "attack_strength": 18,
-        "kills_to_level": 350
-      },
-      {
-        "level": 4,
-        "attack_strength": 20
-      }
-    ]
-  },
-  "nameless_blade": {
-    "wpnname": "\"Nameless Blade\"",
-    "type": [
-      "one-handed_sword"
-    ],
-    "game": [
-      "NieR"
-    ],
-    "levels": [
-      {
-        "level": 1,
-        "attack_power": 100,
-        "magic_power": 0,
-        "guard_break": 30,
-        "armor_break": 100,
-        "weight": "Light"
-      },
-      {
-        "level": 2,
-        "attack_power": 112,
-        "magic_power": 10,
-        "guard_break": 30,
-        "armor_break": 100,
-        "weight": "Light"
-      },
-      {
-        "level": 3,
-        "attack_power": 152,
-        "magic_power": 20,
-        "guard_break": 30,
-        "armor_break": 102,
-        "weight": "Light"
-      },
-      {
-        "level": 4,
-        "attack_power": 204,
-        "magic_power": 30,
-        "guard_break": 30,
-        "armor_break": 103,
-        "weight": "Light"
       }
     ]
   }

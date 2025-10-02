@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2008b8d09cd3c64293000e327f60720, type: 3}
+  m_Name: soldiers_sword
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptable
+  wpnname: Soldier's Sword
+  type:
+  - two_handed_sword
+  game:
+  - Drakengard
+  weapon_id: soldiers_sword
+  ability_name: Breath of Sleipner
+  levels:
+  - level: 1
+    story: A sword forged using secret techniques known only to one family. The family's
+      secret was jealously guarded, and no stranger was allowed to learn it.
+    attack_strength: 4
+    weight: Light
+    MP_cost: 5
+    ability_desc: For 10 seconds, a magic shield envelops Caim, allowing him to move
+      at great speed.
+    ability_count: 0
+    ability_sec: 10
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 1.25
+    kills_to_level: 200
+  - level: 2
+    story: Hoping to discover how the sword was made, a soldier from an enemy kingdom
+      joined the family. His plan was to steal the secret and return it to his own
+      country.
+    attack_strength: 10
+    weight: Light
+    MP_cost: 10
+    ability_desc: For 15 seconds, a magic shield envelops Caim, allowing him to move
+      at great speed.
+    ability_count: 0
+    ability_sec: 15
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 1.5
+    kills_to_level: 300
+  - level: 3
+    story: But the young soldier fell in love with the family's daughter, and he
+      could not bear to part from her. He confessed his plot, and begged her to flee
+      with him back to his country.
+    attack_strength: 12
+    weight: Light
+    MP_cost: 15
+    ability_desc: For 15 seconds, a magic shield envelops Caim, allowing him to move
+      at blazing speed.
+    ability_count: 0
+    ability_sec: 15
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 2
+    kills_to_level: 600
+  - level: 4
+    story: But when the daughter heard his scheme, she murdered the soldier and then
+      took her own life. And so was the secret of the sword kept within the family.
+    attack_strength: 15
+    weight: Light
+    MP_cost: 20
+    ability_desc: For 15 seconds, a magic shield envelops Caim, allowing him to move
+      at unholy speed.
+    ability_count: 0
+    ability_sec: 15
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 2.5
+    kills_to_level: 0

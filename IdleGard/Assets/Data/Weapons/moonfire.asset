@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2008b8d09cd3c64293000e327f60720, type: 3}
+  m_Name: moonfire
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptable
+  wpnname: Moonfire
+  type:
+  - two_handed_sword
+  game:
+  - Drakengard
+  weapon_id: moonfire
+  ability_name: Fang of the Ifrit
+  levels:
+  - level: 1
+    story: This sword is forged of a granite that burns red with eternal heat. Only
+      those who enjoy the protection of the moon god, ruler of the cool night, may
+      dare grasp the handle.
+    attack_strength: 16
+    weight: Moderate
+    MP_cost: 5
+    ability_desc: 1 giant pillar of flame erupts)from the earth.
+    ability_count: 1
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 400
+  - level: 2
+    story: Legend tells of a great warrior who carried this sword into battle. Roaring
+      a battle cry, he charged into the fray, where a hundred enemy archers struck
+      him through with a thousand arrows.
+    attack_strength: 22
+    weight: Moderate
+    MP_cost: 10
+    ability_desc: 4 giant pillars of flame erupt from the earth.
+    ability_count: 4
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 600
+  - level: 3
+    story: Yet not a drop of blood flowed from his wounds, and though arrows pierced
+      his heart, his strength failed him not. His army was the victor on that day.
+    attack_strength: 27
+    weight: Moderate
+    MP_cost: 15
+    ability_desc: 6 giant pillars of flame erupt from the earth.
+    ability_count: 6
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 800
+  - level: 4
+    story: With the battle won, the warrior returned to camp. But in the instant
+      he laid down his sword, he froze as cold and as still as ice. The protection
+      of the moon god had finally claimed his life.
+    attack_strength: 32
+    weight: Moderate
+    MP_cost: 20
+    ability_desc: 12 giant pillars of flame erupt from the earth.
+    ability_count: 12
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 0

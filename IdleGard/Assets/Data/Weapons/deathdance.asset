@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2008b8d09cd3c64293000e327f60720, type: 3}
+  m_Name: deathdance
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptable
+  wpnname: Deathdance
+  type:
+  - one_handed_sword
+  game:
+  - Drakengard
+  weapon_id: deathdance
+  ability_name: Queen Hel's Comfort
+  levels:
+  - level: 1
+    story: A long time ago, there was a small nation that was invaded by its mighty
+      neighbor. The country was helpless as the invaders put its women and children
+      to the sword.
+    attack_strength: 2
+    weight: Light
+    MP_cost: 5
+    ability_desc: 1 swirl of black shadow spins out from Caim.
+    ability_count: 1
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 50
+  - level: 2
+    story: In the small country, there was a brave and beautiful princess who became
+      determined to save her homeland. She disguised herself as a dancing girl and
+      presented herself to the enemy emperor.
+    attack_strength: 4
+    weight: Light
+    MP_cost: 5
+    ability_desc: 2 swirls of black shadow spin out from Caim.
+    ability_count: 2
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 100
+  - level: 3
+    story: The emperor, entranced by the beauty of the dance, immediately fell in
+      love with the princess. But as he approached her, she plunged this sword into
+      his breast and slew him on the spot.
+    attack_strength: 5
+    weight: Light
+    MP_cost: 5
+    ability_desc: 4 swirls of black shadow spin out from Caim.
+    ability_count: 4
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 150
+  - level: 4
+    story: 'After that, the mighty empire fell into ruin and decline, and the princess''s
+      country was saved. To this day, every girl of the kingdom dreams of becoming
+
+      the
+      dancing princess of legend.'
+    attack_strength: 10
+    weight: Light
+    MP_cost: 5
+    ability_desc: 8 swirls of black shadow spin out from Caim.
+    ability_count: 8
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 0

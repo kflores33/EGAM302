@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2008b8d09cd3c64293000e327f60720, type: 3}
+  m_Name: maidens_kris
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptable
+  wpnname: Maiden's Kris
+  type:
+  - one_handed_sword
+  game:
+  - Drakengard
+  weapon_id: maidens_kris
+  ability_name: Crescentsong
+  levels:
+  - level: 1
+    story: 'When the great shrine was built, young women were chosen to be sacrifices.
+
+      They
+      plunged this kris sword into their own hearts. The blade glimmers with
+
+      the
+      souls of its young victims.'
+    attack_strength: 3
+    weight: Light
+    MP_cost: 5
+    ability_desc: 1 crescent blade of light flies at the enemy.
+    ability_count: 1
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 200
+  - level: 2
+    story: 'The first sacrifice was a respected and pious believer. The pure woman
+      was
+
+      chosen to serve as the foundation stone of the new shrine.'
+    attack_strength: 6
+    weight: Light
+    MP_cost: 5
+    ability_desc: 3 crescent blades of light fly at the enemy.
+    ability_count: 3
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 300
+  - level: 3
+    story: 'The second sacrifice was a kind girl of the village. Though sad to be
+      chosen
+
+      for death, she consoled herself with the knowledge that her sacrifice
+      would
+
+      help others.'
+    attack_strength: 8
+    weight: Light
+    MP_cost: 5
+    ability_desc: 5 crescent blades of light fly at the enemy.
+    ability_count: 5
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 600
+  - level: 4
+    story: 'The third sacrifice was a girl who made her living as a thief. She cursed
+      the
+
+      gods angrily as her life was taken. At the moment the sword struck
+      home, it
+
+      coiled and writhed like a wounded snake.'
+    attack_strength: 14
+    weight: Light
+    MP_cost: 5
+    ability_desc: 9 crescent blades of light fly at the enemy.
+    ability_count: 9
+    ability_sec: 0
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 0

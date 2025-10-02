@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2008b8d09cd3c64293000e327f60720, type: 3}
+  m_Name: ravenfeeder
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponScriptable
+  wpnname: Ravenfeeder
+  type:
+  - one_handed_sword
+  game:
+  - Drakengard
+  weapon_id: ravenfeeder
+  ability_name: Breath of the Aesir
+  levels:
+  - level: 1
+    story: A circular-bladed sword owned by a noble family that lived deep within
+      a great forest. It was said that the user of this weapon would be blessed by
+      the gods with three lives.
+    attack_strength: 7
+    weight: Light
+    MP_cost: 5
+    ability_desc: For 10 seconds, runes of the gods swirl around Caim and make him
+      invincible.
+    ability_count: 0
+    ability_sec: 10
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 300
+  - level: 2
+    story: 'The sword was originally designed as a tool for torture. Its outer blade
+      is
+
+      sharp enough to bisect a man with one stroke, while the inner is
+      kept dull
+
+      to inflict hideous pain.'
+    attack_strength: 11
+    weight: Light
+    MP_cost: 10
+    ability_desc: For 15 seconds, runes of the gods swirl around Caim and make him
+      invincible.
+    ability_count: 0
+    ability_sec: 15
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 400
+  - level: 3
+    story: 'Poison can be poured into the handle. As soon as the victim is cut, the
+      poison
+
+      flows into the wound and causes nearly instantaneous death.
+
+'
+    attack_strength: 14
+    weight: Light
+    MP_cost: 15
+    ability_desc: For 25 seconds, runes of the gods swirl around Caim and make him
+      invincible.
+    ability_count: 0
+    ability_sec: 25
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 600
+  - level: 4
+    story: So cruel was this weapon judged to be, it was banned by the old kings.
+      Soon thereafter, it became infamous as the tool of assassins.
+    attack_strength: 19
+    weight: Light
+    MP_cost: 20
+    ability_desc: For 30 seconds, runes of the gods swirl around Caim and make him
+      invincible.
+    ability_count: 0
+    ability_sec: 30
+    ability_atk_multi: 1
+    ability_damage_multi: 0
+    ability_speed_multi: 0
+    kills_to_level: 0
