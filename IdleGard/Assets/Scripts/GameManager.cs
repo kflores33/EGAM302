@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -15,4 +17,9 @@ public class GameManager : MonoBehaviour
     // tell spawner when to spawn
     // house references & inter-script functions
     // manage game state
+
+    private void Update()
+    {
+
+    }
 }
