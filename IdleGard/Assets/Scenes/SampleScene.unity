@@ -2161,6 +2161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f55e5ae8bced14cae0c08fd5c16bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  EnemyPositionList:
+  - {x: 2.77, y: 2.14, z: -5.2}
+  - {x: 3.78, y: 1.86, z: -5.31}
+  - {x: 1.58, y: 1.86, z: -5.31}
+  chosenEnemy: {fileID: 11400000, guid: 702c7b7253fd916498ab86e9868ab3c0, type: 2}
 --- !u!1 &1764694395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerBehavior
   weaponPrefab: {fileID: 3240423024725205068, guid: 6bd9602adb0d76a4f8cd83e6bb9342cd, type: 3}
   characterPrefab: {fileID: 4661593476221547209, guid: 9be1f9a5b4520fd4e9816882ab5ffb93, type: 3}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 4997731635735210406, guid: 5b3c7f69d4ec28744af0686d3a436bad, type: 3}
 --- !u!4 &1855371746
 Transform:
   m_ObjectHideFlags: 0

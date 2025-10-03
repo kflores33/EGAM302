@@ -554,7 +554,7 @@ MonoBehaviour:
   LevelProgress: {fileID: 7059050846624076491}
   BKGDPanel: {fileID: 4389733920001950358}
   panelActive: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.5137255}
-  panelInactive: {r: 1, g: 1, b: 1, a: 1}
+  panelInactive: {r: 1, g: 1, b: 1, a: 0.35686275}
 --- !u!1 &5055099026123576140
 GameObject:
   m_ObjectHideFlags: 0
