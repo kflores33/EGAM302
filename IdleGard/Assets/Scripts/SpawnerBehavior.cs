@@ -92,8 +92,7 @@ public class SpawnerBehavior : MonoBehaviour
     }
     void SpawnEnemy(EnemyScriptable enemyData, List<Vector3> spawnPoints, int count)
     {
-        List<Vector3> validSpawnPoints = new List<Vector3>();
-         validSpawnPoints = spawnPoints;
+        List<Vector3> validSpawnPoints = new List<Vector3>(spawnPoints);
 
         for (int i = 0; i < count; i++)
         {
@@ -109,6 +108,8 @@ public class SpawnerBehavior : MonoBehaviour
 
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             enemy.GetComponent<EnemyBehavior>().enemyData = enemyData; // assign the selected enemy data to the enemy behavior script
+
+            GameManager.instance.RegisterActiveEnemy(enemy.GetComponent<EnemyBehavior>());
         }
     }
 

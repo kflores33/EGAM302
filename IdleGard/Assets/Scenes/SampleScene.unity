@@ -2162,9 +2162,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   EnemyPositionList:
-  - {x: 2.77, y: 2.14, z: -5.2}
-  - {x: 3.78, y: 1.86, z: -5.31}
-  - {x: 1.58, y: 1.86, z: -5.31}
+  - {x: 1.97, y: 2.26, z: -5.3}
+  - {x: 2.98, y: 1.86, z: -5.4}
+  - {x: 0.78, y: 1.86, z: -5.4}
+  - {x: 1.97, y: 1.46, z: -5.5}
+  - {x: 2.98, y: 1.06, z: -5.6}
+  - {x: 0.78, y: 1.06, z: -5.6}
   chosenEnemy: {fileID: 11400000, guid: 702c7b7253fd916498ab86e9868ab3c0, type: 2}
 --- !u!1 &1764694395
 GameObject:
