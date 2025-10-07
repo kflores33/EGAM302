@@ -132,7 +132,7 @@ public class CharacterBehavior : MonoBehaviour
 
     public bool CheckIfHasWeapon()
     {
-        if (heldWeapons.Count < 1)
+        if (heldWeapons.Count > 0)
         {
             return true;
         }
