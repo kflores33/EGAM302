@@ -5,7 +5,18 @@ public class WeaponBehavior : MonoBehaviour
     public WeaponScriptable weaponData; // reference to weapon data scriptable object
     public WeaponInvSlot weaponInvSlot; // reference to inventory slot this weapon came from
 
+    public UniversalValues universalValues;
+
+    public int currentLevel { get; }
+    public float attackRate { get; set; }
+
     public bool draggable;
+
+    private void Start()
+    {
+        string weaponWeight = weaponData.levels[currentLevel].weight;
+        attackRate = universalValues.WeightTypes[weaponWeight].AttackRate;
+    }
 
     private void Update()
     {

@@ -4,7 +4,13 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "UniversalValues", menuName = "MiscellaneousData/UniversalValues")]
 public class UniversalValues : ScriptableObject
 {
-    public List<Weight> WeightTypes = new List<Weight>(); // there should be 4
+    public Dictionary<string, Weight> WeightTypes = new Dictionary<string, Weight>
+    {
+        { "Light", new Weight { AttackRate = 0.6f, WeightClass = "Light" } },
+        { "Moderate", new Weight { AttackRate = 0.9f, WeightClass = "Moderate" } },
+        { "Heavy", new Weight { AttackRate = 1.4f, WeightClass = "Heavy" } },
+        { "Very Heavy", new Weight { AttackRate = 4f, WeightClass = "Very Heavy" } }
+    }; // there should be 4
 
     //[Range(0f, 100f)] // Add this attribute to show a slider in the editor
     //public float BloodPerKill;

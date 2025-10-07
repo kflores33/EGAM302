@@ -18,21 +18,28 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] List<Vector3> EnemyPositionList = new List<Vector3>();
     public EnemyScriptable chosenEnemy; // temporary until enemy database is set up
-    List<EnemyBehavior> ActiveEnemies;
+    [SerializeField]List<EnemyBehavior> ActiveEnemies = new List<EnemyBehavior>();
 
     // tell spawner when to spawn
     // house references & inter-script functions
     // manage game state
 
+    bool canSpawnNewWave;
+    private void Start()
+    {
+        canSpawnNewWave = true;
+    }
+
     private void Update()
     {
-        if (ActiveEnemies == null || ActiveEnemies.Count < 1)
+        if (canSpawnNewWave)
         {
             //spawn enemies
             int enemyCount = Random.Range(1, EnemyPositionList.Count);
-            //EnemyScriptable chosenEnemy = FindAnyObjectByType<EnemyDatabase>().enemyList[Random.Range(0, FindAnyObjectByType<EnemyDatabase>().enemyList.Count)];
-
             SpawnerBehavior.instance.RequestSpawnEnemy(chosenEnemy, EnemyPositionList, enemyCount);
+            Debug.Log("spawning new Wave");
+
+            canSpawnNewWave = false;
         }
     }
 
@@ -48,9 +55,15 @@ public class GameManager : MonoBehaviour
         if (ActiveEnemies.Contains(enemy))
         {
             ActiveEnemies.Remove(enemy);
+
+            if( ActiveEnemies.Count < 1) { canSpawnNewWave = true; }
         }
     }
-    public List<EnemyBehavior> ProvideEnemyList()
+    public void PopulateEnemyList(List<EnemyBehavior> targetList)
+    {
+        targetList.AddRange(ActiveEnemies);
+    }
+    public List<EnemyBehavior> GetActiveEnemies()
     {
         return ActiveEnemies;
     }

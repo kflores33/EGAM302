@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using System.Collections;
+using UnityEngine.Rendering;
 
 public class CharacterBehavior : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class CharacterBehavior : MonoBehaviour
 
     private void Update()
     {
+        CheckIfHasWeapon();
+
         switch(CurrentState)
         {
             case CharacterStates.Active:
@@ -37,42 +40,73 @@ public class CharacterBehavior : MonoBehaviour
         }
     }
 
+    EnemyBehavior currentTarget;
+    bool canAttack;
     private void UpdateActive()
     {
-        
+        if (canAttack)
+        {
+            foreach (var weapon in heldWeapons)
+            { 
+                StartCoroutine(AttackCoroutine(weapon));
+            }
+        }
+        if (!CheckIfWaveActive()) SwitchStates();
+    }
+
+    public void DeregisterTarget(EnemyBehavior target)
+    {
+        if (currentTarget = target) currentTarget = null;
+        if (targetList.Contains(target))targetList.Remove(target);
+        if (targetList.Count == 0) { Debug.Log("Wave defeated"); StopAllCoroutines(); SwitchStates(); }
+    }
+
+    void UpdateTargetSelection()
+    {
+        if (currentTarget == null)
+        {
+            if ( targetList.Count == 0) GameManager.instance.PopulateEnemyList(targetList); // make sure target list is populated
+            
+            for(int i = 0; i < targetList.Count; i++)
+            {
+                EnemyBehavior target = targetList[i];
+                Debug.Log($"{target} is no. {i} in {targetList}");
+            }
+            if (targetList.Count == 0) { Debug.LogError("No targets in targetList!"); }
+
+            currentTarget = targetList[0];
+            Debug.Log($"{currentTarget} selected. Preparing to attack");
+        }
+    }
+    IEnumerator AttackCoroutine(WeaponBehavior chosenWeapon)
+    {
+        canAttack = false;
+
+        UpdateTargetSelection();
+
+        yield return new WaitForSeconds(chosenWeapon.attackRate);
+
+        if(currentTarget == null) { currentTarget = targetList[0]; }
+        currentTarget.TakeDamage(chosenWeapon.weaponData.levels[chosenWeapon.currentLevel].attack_strength, this);
+
+        canAttack = true;
     }
 
     private void UpdateInactive()
     {
-
-    }
-
-    // get list of current enemies from game manager
-
-    // function for damage calculation & coroutine for attack cooldown (based on weapon weight) 
-    // add character specific modifiers (weapon proficiency)
-
-    // send out damage to enemy on hit (via event system?) 
-
-    //lock onto closest enemy
-
-    private void UpdateTargetList(List<EnemyBehavior> targetList) // use this in the line before the attack in the attack coroutine
-    {
-        // check list of all enemies in scene (from game manager)
-        // compare it to current target list
-        // if there are any enemies not present in the target list, add them to it
-
-        // main attack target will always be the first enemy in the list
+        if (CheckIfWaveActive())
+        {
+            SwitchStates();
+        }
     }
 
     private void OnSwitchToActive()
     {
-
         CurrentState = CharacterStates.Active;
+        canAttack = true;
     }
     private void OnSwitchToInactive()
     {
-
         CurrentState = CharacterStates.Inactive;
     }
 
@@ -96,14 +130,28 @@ public class CharacterBehavior : MonoBehaviour
         }
     }
 
-    public void CheckIfHasWeapon()
+    public bool CheckIfHasWeapon()
     {
         if (heldWeapons.Count < 1)
         {
-            if (CurrentState == CharacterStates.Active) OnSwitchToInactive();
-            return;
+            return true;
         }
+        return false;
+    }
+    public bool CheckIfWaveActive()
+    {
+        if (GameManager.instance.GetActiveEnemies().Count > 0)
+        {
+            return true ;
+        }
+        return false;
+    }
 
-        if (CurrentState == CharacterStates.Inactive) OnSwitchToActive();
+    public void SwitchStates()
+    {
+        if (CheckIfWaveActive() && CheckIfHasWeapon())
+        { if (CurrentState == CharacterStates.Inactive) OnSwitchToActive(); Debug.Log("Wave Active: switching back to active state"); }
+        else
+        { if (CurrentState == CharacterStates.Active) OnSwitchToInactive(); Debug.Log("Character now Inactive"); }
     }
 }

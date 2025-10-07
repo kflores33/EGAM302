@@ -13,18 +13,11 @@ public class SpawnerBehavior : MonoBehaviour
         }
         else { Destroy(this); }
     }
-
-    // public functions for spawning weapons, characters, and enemies into the scene
+    public UniversalValues universalValues;
 
     public GameObject weaponPrefab;
     public GameObject characterPrefab;
     public GameObject enemyPrefab;
-
-    //private bool shouldSpawnWeapon;
-
-    //WeaponInvSlot weaponInvSlot;
-    //WeaponScriptable selectedWeapon;
-    //Vector3 spawnPosition;
 
     private void Update()
     {
@@ -35,20 +28,13 @@ public class SpawnerBehavior : MonoBehaviour
         }
     }
 
-    // Call this method from other scripts to request a weapon spawn
-    //public void RequestSpawnWeapon(Vector3 position, WeaponScriptable weapon, WeaponInvSlot slot)
-    //{
-    //    spawnPosition = position;
-    //    selectedWeapon = weapon;
-    //    weaponInvSlot = slot;
-    //    shouldSpawnWeapon = true;
-    //}
     #region Weapon Spawning and Equipping
     public void SpawnWeapon(Vector3 position, WeaponScriptable selectedWeapon, WeaponInvSlot weaponInvSlot)
     {
         GameObject weapon = Instantiate(weaponPrefab, position, Quaternion.identity);
         
         weapon.GetComponent<WeaponBehavior>().weaponData = selectedWeapon; // assign the selected weapon data to the weapon behavior script
+        weapon.GetComponent<WeaponBehavior>().universalValues = universalValues;
         weapon.GetComponent<WeaponBehavior>().draggable = true;
         weapon.GetComponent<WeaponBehavior>().weaponInvSlot = weaponInvSlot; // assign the inventory slot this weapon came from
     }
