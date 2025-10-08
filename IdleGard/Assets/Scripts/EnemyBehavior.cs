@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
     public EnemyScriptable enemyData;
+
     float maxHP;
     float currentHP;
     List<CharacterBehavior> damageSources = new List<CharacterBehavior>();
@@ -26,6 +28,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         currentHP -= damage;
         Debug.Log($"Dealt {damage} damge to {this.name}!");
+
+        GeneralUIHandler.instance.SpawnDamagePopup(transform.position, damage);
 
         if (!damageSources.Contains(damageSource))
         {

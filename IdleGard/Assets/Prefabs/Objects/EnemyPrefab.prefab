@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehavior
   enemyData: {fileID: 0}
+  damagePopup: {fileID: 0}
 --- !u!1 &7557053278726629438
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class SpawnerBehavior : MonoBehaviour
     }
     public UniversalValues universalValues;
 
+    public GameObject damagePopup;
+
     public GameObject weaponPrefab;
     public GameObject characterPrefab;
     public GameObject enemyPrefab;

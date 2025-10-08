@@ -20,6 +20,8 @@ public class UIRaycastHandler : MonoBehaviour
     [SerializeField]EventSystem eventSystem;
     PointerEventData eventData;
 
+    public DetailHoverPanel detailHoverPanel;
+
     private void Start()
     {
         if (raycaster == null)
@@ -55,6 +57,7 @@ public class UIRaycastHandler : MonoBehaviour
             foreach (RaycastResult result in results) 
             {
                 GameObject hitObject = result.gameObject;
+                // below is where different raycast behaviors can be defined.
                 if (hitObject.GetComponent<WeaponInvSlot>() != null) { 
 
                     Debug.Log($"hit {hitObject}");
@@ -68,6 +71,20 @@ public class UIRaycastHandler : MonoBehaviour
                     break;
                 }
             }
+        }
+
+        // CURSOR HOVER 
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
+        {
+            if (hitInfo.collider == null) { detailHoverPanel.HideHoverPanel() ; return; }
+
+            if (hitInfo.collider.GetComponentInParent<WeaponBehavior>() != null)
+            {
+                Debug.Log("weapon found. hover box active");
+                WeaponBehavior wpn = hitInfo.collider.GetComponentInParent<WeaponBehavior>();
+                detailHoverPanel.ShowHoverPanel(detailHoverPanel.GetInfoWeapon(wpn));
+            }
+            else { detailHoverPanel.HideHoverPanel(); }
         }
     }
 }

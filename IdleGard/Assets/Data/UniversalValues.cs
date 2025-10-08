@@ -6,9 +6,9 @@ public class UniversalValues : ScriptableObject
 {
     public Dictionary<string, Weight> WeightTypes = new Dictionary<string, Weight>
     {
-        { "Light", new Weight { AttackRate = 0.6f, WeightClass = "Light" } },
-        { "Moderate", new Weight { AttackRate = 0.9f, WeightClass = "Moderate" } },
-        { "Heavy", new Weight { AttackRate = 1.4f, WeightClass = "Heavy" } },
+        { "Light", new Weight { AttackRate = 0.5f, WeightClass = "Light" } },
+        { "Moderate", new Weight { AttackRate = 1f, WeightClass = "Moderate" } },
+        { "Heavy", new Weight { AttackRate = 1.8f, WeightClass = "Heavy" } },
         { "Very Heavy", new Weight { AttackRate = 4f, WeightClass = "Very Heavy" } }
     }; // there should be 4
 
