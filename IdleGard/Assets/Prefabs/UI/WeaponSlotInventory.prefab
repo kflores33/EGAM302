@@ -513,7 +513,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4637208287722120895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -526,10 +526,10 @@ RectTransform:
   - {fileID: 4952606683481673467}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6.6413}
-  m_SizeDelta: {x: -182.8208, y: 206.048}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 270, y: 435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3579374484986216437
 CanvasRenderer:
@@ -628,6 +628,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponInvSlot
   weaponData: {fileID: 0}
+  saveData:
+    weapon_id: 
+    currentLevel: 0
+    killCount: 0
   weaponIsActive: 0
   image: {fileID: 7789541548284390825}
   WeaponName: {fileID: 8756271886852345634}
@@ -941,7 +945,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 159.53, y: 15}
+  m_SizeDelta: {x: 205, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2562151962147325987
 CanvasRenderer:
@@ -998,8 +1002,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

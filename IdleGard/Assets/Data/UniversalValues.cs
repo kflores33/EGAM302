@@ -17,6 +17,11 @@ public class UniversalValues : ScriptableObject
 
     [Range(0.01f, 2)]
     public float killReqScaler = 1;
+
+    [Range(0.5f, 20)]
+    public float killReqToBlood = 1.5f;
+
+    public float waveReqScaler = 1.2f;
 }
 
 [System.Serializable]

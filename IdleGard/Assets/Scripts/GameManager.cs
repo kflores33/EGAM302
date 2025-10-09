@@ -5,6 +5,8 @@ using UnityEngine.UI;
 // keep track of game state
 public class GameManager : MonoBehaviour
 {
+    public UniversalValues universalValues;
+    
     public static GameManager instance;
 
     private void Awake()
@@ -14,20 +16,24 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         else { Destroy(this); }
+
+        wavesLeft = SaveManager.instance.WavesUntilWeapon;
+        wavesUntilNewWeapon = SaveManager.instance.WavesBetweenWeapons;
     }
 
     [SerializeField] List<Vector3> EnemyPositionList = new List<Vector3>();
     public EnemyScriptable chosenEnemy; // temporary until enemy database is set up
     [SerializeField]List<EnemyBehavior> ActiveEnemies = new List<EnemyBehavior>();
 
-    // tell spawner when to spawn
-    // house references & inter-script functions
-    // manage game state
-
     bool canSpawnNewWave;
+    public int wavesUntilNewWeapon = 3;
+    public int wavesLeft;
+
     private void Start()
     {
-        canSpawnNewWave = true;
+        int enemyCount = Random.Range(1, EnemyPositionList.Count);
+        SpawnerBehavior.instance.RequestSpawnEnemy(chosenEnemy, EnemyPositionList, enemyCount);
+        Debug.Log("spawning first Wave");
     }
 
     private void Update()
@@ -40,8 +46,27 @@ public class GameManager : MonoBehaviour
             Debug.Log("spawning new Wave");
 
             SaveManager.instance.IncreaseWave();
+
+            --wavesLeft;
+            if (wavesLeft == 0)
+            {
+                ShopInvManager.instance.AddRandomWeaponToShop();
+
+                float interm = wavesUntilNewWeapon; 
+                interm *= universalValues.waveReqScaler;
+                wavesUntilNewWeapon = (int)Mathf.Round(interm);
+
+                wavesLeft = wavesUntilNewWeapon;
+            }
+
             canSpawnNewWave = false;
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveManager.instance.UpdateWavesBtwn(wavesUntilNewWeapon);
+        SaveManager.instance.UpdateWavesLeft(wavesLeft);
     }
 
     public void RegisterActiveEnemy(EnemyBehavior enemy)

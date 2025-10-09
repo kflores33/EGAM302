@@ -39,6 +39,9 @@ public class SpawnerBehavior : MonoBehaviour
         weapon.GetComponent<WeaponBehavior>().universalValues = universalValues;
         weapon.GetComponent<WeaponBehavior>().draggable = true;
         weapon.GetComponent<WeaponBehavior>().weaponInvSlot = weaponInvSlot; // assign the inventory slot this weapon came from
+
+        OwnedWeapon ownedWeapon = weaponInvSlot.saveData;
+        weapon.GetComponent<WeaponBehavior>().thisWeapon = ownedWeapon; // assign the owned weapon data to the weapon behavior script
     }
     public void RemoveEquippedWeapon(WeaponBehavior equippedWeapon, GameObject weaponParent, CharacterBehavior selectedCharacter, WeaponInvSlot weaponInvSlot)
     {

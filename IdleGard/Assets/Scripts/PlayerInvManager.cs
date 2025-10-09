@@ -11,6 +11,10 @@ public class PlayerInvManager : MonoBehaviour
 
         ownedWeaponDB = SaveManager.instance.RuntimeWeapons; // make sure the correct thing is referenced
     }
+    private void Start()
+    {
+        
+    }
 
     public OwnedWeaponDB ownedWeaponDB;
     public WeaponDatabase weaponDatabase;
@@ -22,13 +26,14 @@ public class PlayerInvManager : MonoBehaviour
         if (saveData == null) { Debug.Log("No save data to reference"); return; }
 
         saveData.killCount++;
+
         var nextLevel = saveData.currentLevel + 1;
         var reqKills = saveData.weaponData.levels[saveData.currentLevel].kills_to_level;
-            float killScaler = universalValues.killReqScaler;
-            float toRound = reqKills * killScaler;
-        reqKills = (int)Mathf.Round(toRound);
+        //    float killScaler = universalValues.killReqScaler;
+        //    float toRound = reqKills * killScaler;
+        //reqKills = (int)Mathf.Round(toRound);
 
-        if (saveData.killCount >= reqKills) // level up if required kill count is reached
+        if (saveData.killCount >= reqKills && saveData.currentLevel < 3) // level up if required kill count is reached
         {
             saveData.currentLevel++;
             saveData.killCount = 0;

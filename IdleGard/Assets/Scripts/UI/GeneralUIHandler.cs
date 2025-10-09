@@ -26,6 +26,11 @@ public class GeneralUIHandler : MonoBehaviour
                                          SaveManager.instance.RuntimeWeapons.ownedWeapons.Count > 0); // wait until there's at least one weapon ready to display
 
         PopulateWeaponInventory();
+
+        yield return new WaitUntil(() => SaveManager.instance.RuntimeWeapons != null &&
+                                 SaveManager.instance.RuntimeWeapons.ownedWeapons.Count > 0 &&
+                                 SaveManager.instance.RuntimeWeapons.shopWeapons != null);
+        PopulateWeaponShop();
     }
 
     public GameObject damagePopup;
@@ -69,9 +74,62 @@ public class GeneralUIHandler : MonoBehaviour
         }
         foreach (var weapon in PlayerInvManager.instance.ownedWeaponDB.ownedWeapons)
         {
-            GameObject slot = Instantiate(WeaponInvSlotPrefab, WeaponInvParent);
+            GameObject slot = Instantiate(WeaponInvSlotPrefab, WeaponInvParent, false);
+            Debug.Log($"Slot instantiated: {slot.name} | Will destroy? {slot == null}");
+            StartCoroutine(DelayedCheck(slot));
             slot.GetComponent<WeaponInvSlot>().Initialize(weapon);
+
+            Debug.Log($"{weapon.weapon_id} added to Weapon Inventory at {slot.transform.position}, parent={slot.transform.parent.name}");
         }
     }
     #endregion
+    #region Weapon Shop UI
+    public GameObject WeaponShopSlotPrefab;
+    public Transform WeaponShopParent;
+
+    public void PopulateWeaponShop()
+    {
+        // clear existing slots
+        foreach (Transform child in WeaponShopParent)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (var weapon in PlayerInvManager.instance.ownedWeaponDB.shopWeapons)
+        {
+            GameObject slot = Instantiate(WeaponShopSlotPrefab, WeaponShopParent, false);
+            slot.GetComponent<WeaponShopSlot>().Initialize(weapon);
+        }
+    }
+    public void UpdateWeaponShop(ShopWeapon id)
+    {
+        GameObject slot = Instantiate(WeaponShopSlotPrefab, WeaponShopParent);
+        slot.GetComponent<WeaponShopSlot>().Initialize(id);
+    }
+    #endregion
+
+    bool toggleMenu; // false is Inventory, true is Shop
+    public void TryToggleInventory()
+    {
+        if (toggleMenu)
+        {
+            WeaponShopParent.parent.gameObject.SetActive(false);
+            WeaponInvParent.parent.gameObject.SetActive(true);
+            toggleMenu = false;
+        }
+    }
+    public void TryToggleShop()
+    {
+        if (!toggleMenu)
+        {
+            WeaponInvParent.parent.gameObject.SetActive(false);
+            WeaponShopParent.parent.gameObject.SetActive(true);
+            toggleMenu = true;  
+        }
+    }
+
+    private IEnumerator DelayedCheck(GameObject slot)
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log($"After 1s, slot still exists? {(slot != null ? "Yes" : "No")}");
+    }
 }

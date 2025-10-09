@@ -7,6 +7,8 @@ using UnityEngine;
 [CreateAssetMenu( menuName = "Weapons/OwnedWeaponDB")]
 public class OwnedWeaponDB : ScriptableObject
 {
+    [System.NonSerialized] public UniversalValues UniversalValues;
+
     public List<OwnedWeapon> ownedWeapons = new List<OwnedWeapon>();
 
     public OwnedWeapon GetWeapon(string id)
@@ -27,6 +29,29 @@ public class OwnedWeaponDB : ScriptableObject
             weaponData = weapon
         });
     }
+
+    public List<ShopWeapon> shopWeapons = new List<ShopWeapon>();
+
+    public ShopWeapon GetShopWeapon(string id)
+    {
+        return shopWeapons.FirstOrDefault(s => s.weapon_id == id);
+    }
+
+    public void AddShopWeapon(WeaponScriptable weapon)
+    {
+        if (GetShopWeapon(weapon.weapon_id) != null) return;
+        shopWeapons.Add(new ShopWeapon
+        {
+            weapon_id = weapon.weapon_id,
+            price = weapon.levels[2].kills_to_level * UniversalValues.killReqToBlood,
+            weaponData = weapon
+        });
+    }
+    public void RemoveShopWeapon(ShopWeapon weapon)
+    {
+        if (!shopWeapons.Contains(weapon)) return;
+        shopWeapons.Remove(weapon);
+    }
 }
 
 [System.Serializable]
@@ -35,6 +60,14 @@ public class OwnedWeapon
     public string weapon_id;
     public int currentLevel;
     public int killCount; // can subtract from level up requirement to get # of kills till next level
+
+    [System.NonSerialized] public WeaponScriptable weaponData;
+}
+[System.Serializable]
+public class ShopWeapon
+{
+    public string weapon_id;
+    public float price;
 
     [System.NonSerialized] public WeaponScriptable weaponData;
 }

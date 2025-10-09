@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [CreateAssetMenu(menuName = "Weapons/WeaponDatabase")]
 public class WeaponDatabase : ScriptableObject
@@ -26,5 +27,12 @@ public class WeaponDatabase : ScriptableObject
         
         return lookup.TryGetValue(weapon_id, out WeaponScriptable weapon) ? weapon : null;
         // (? is used in this case to make this a conditional statement where TryGetValue only returns a value if weapon_id matches a key---otherwise its null)
+    }
+    public WeaponScriptable GetRandomWeapon()
+    {
+        if (lookup == null) Initialize();
+
+        int randomIndex = Random.Range(0, allWeapons.Count);
+        return lookup.ElementAtOrDefault(randomIndex).Value;
     }
 }

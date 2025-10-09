@@ -40,6 +40,16 @@ public class WeaponInvSlot : MonoBehaviour
         if (saveData != null)
         {
             EXPBar.value = saveData.killCount;
+
+            if (saveData.currentLevel >= weaponData.levels.Count - 1)
+            {
+                LevelProgress.text = "MAX LEVEL";
+                EXPBar.value = EXPBar.maxValue;
+            }
+            else
+                LevelProgress.text = $"{saveData.killCount}/{weaponData.levels[saveData.currentLevel].kills_to_level} Kills until Level {saveData.currentLevel + 2}";
+
+            WeaponLevel.text = $"Level {saveData.currentLevel + 1}";
         }
     }
 
@@ -50,9 +60,14 @@ public class WeaponInvSlot : MonoBehaviour
 
         WeaponName.text = weaponData.wpnname;
         WeaponType.text = weaponData.levels[0].weight;
-        WeaponLevel.text = (weapon.currentLevel + 1).ToString();
+        WeaponLevel.text = $"Level {weapon.currentLevel + 1}";
 
-        EXPBar.maxValue = weaponData.levels[weapon.currentLevel].kills_to_level;
+        if (weapon.currentLevel >= weaponData.levels.Count - 1)
+        {
+            EXPBar.maxValue = weaponData.levels[2].kills_to_level;
+        }
+        else EXPBar.maxValue = weaponData.levels[weapon.currentLevel].kills_to_level;
+
         EXPBar.minValue = 0;
     }
 }
