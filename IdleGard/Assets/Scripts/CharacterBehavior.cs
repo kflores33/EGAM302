@@ -70,12 +70,12 @@ public class CharacterBehavior : MonoBehaviour
             for(int i = 0; i < targetList.Count; i++)
             {
                 EnemyBehavior target = targetList[i];
-                Debug.Log($"{target} is no. {i} in {targetList}");
+                //Debug.Log($"{target} is no. {i} in {targetList}");
             }
             if (targetList.Count == 0) { Debug.LogError("No targets in targetList!"); }
 
             currentTarget = targetList[0];
-            Debug.Log($"{currentTarget} selected. Preparing to attack");
+            //Debug.Log($"{currentTarget} selected. Preparing to attack");
         }
     }
     IEnumerator AttackCoroutine(WeaponBehavior chosenWeapon)

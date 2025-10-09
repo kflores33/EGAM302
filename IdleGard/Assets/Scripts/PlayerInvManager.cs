@@ -14,10 +14,12 @@ public class PlayerInvManager : MonoBehaviour
     public WeaponDatabase weaponDatabase;
     public UniversalValues universalValues;
 
+    public SaveManager saveManager;
+
     public void RegisterKill(string weapon_id)
     {
-        var saveData = ownedWeaponDB.GetWeapon(weapon_id); // basically referencing itself....shhh
-        if (saveData == null) return;
+        var saveData = ownedWeaponDB.GetWeapon(weapon_id);
+        if (saveData == null) { Debug.Log("No save data to reference"); return; }
 
         saveData.killCount++;
         var nextLevel = saveData.currentLevel + 1;
@@ -32,6 +34,7 @@ public class PlayerInvManager : MonoBehaviour
             saveData.killCount = 0;
         }
 
+        saveManager.Save();
         Debug.Log($"Killed enemy. Kill Count = {saveData.killCount}");
     }
 }

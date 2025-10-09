@@ -28,4 +28,22 @@ public class GeneralUIHandler : MonoBehaviour
     }
 
     // populate weapon inventory based on owned weapons
+    #region Weapon Inventory UI
+    public GameObject WeaponInvSlotPrefab;
+    public Transform WeaponInvParent;
+
+    public void PopulateWeaponInventory()
+    {
+        // clear existing slots
+        foreach (Transform child in WeaponInvParent)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (var weapon in PlayerInvManager.instance.ownedWeaponDB.ownedWeapons)
+        {
+            GameObject slot = Instantiate(WeaponInvSlotPrefab, WeaponInvParent);
+            slot.GetComponent<WeaponInvSlot>().Initialize(weapon);
+        }
+    }
+    #endregion
 }

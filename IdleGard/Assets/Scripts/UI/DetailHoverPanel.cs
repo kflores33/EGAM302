@@ -9,8 +9,6 @@ public class DetailHoverPanel : MonoBehaviour
 
     [SerializeField]GameObject hoverPanelObj;
     [SerializeField]TMP_Text textBox;
-    public float targetPositionOffsetX;
-    public float targetPositionOffsetY;
 
     public void Start()
     {

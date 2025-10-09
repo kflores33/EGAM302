@@ -86,7 +86,7 @@ public class WeaponBehavior : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("hit nothing, destroying weapon");
+                        //Debug.Log("hit nothing, destroying weapon");
                         weaponInvSlot.weaponIsActive = false; // if we hit something else, mark the inventory slot as inactive
                         Destroy(this.gameObject); // if we hit something else, destroy the weapon
                     }

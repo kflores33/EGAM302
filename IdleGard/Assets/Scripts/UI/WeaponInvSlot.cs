@@ -6,6 +6,7 @@ using TMPro;
 public class WeaponInvSlot : MonoBehaviour
 {
     public WeaponScriptable weaponData;
+    public OwnedWeapon saveData;
 
     public bool weaponIsActive;
 
@@ -26,13 +27,6 @@ public class WeaponInvSlot : MonoBehaviour
     {
         if (weaponData == null) { Debug.LogError("WeaponInvSlot missing WeaponScriptable reference"); return; }
 
-        WeaponName.text = weaponData.wpnname;
-
-        //if (weaponData.type.Count >1) WeaponType.text = $"{weaponData.type[0]}, {weaponData.type[1]}";
-        //else WeaponType.text = weaponData.type[0];
-
-        WeaponType.text = weaponData.levels[0].weight;
-
         // weapon level stuff later
     }
     private void Update()
@@ -43,5 +37,19 @@ public class WeaponInvSlot : MonoBehaviour
         }
         else { BKGDPanel.color = panelInactive; }
 
+        EXPBar.value = saveData.killCount;
+    }
+
+    public void Initialize(OwnedWeapon weapon)
+    {
+        saveData = weapon;
+        weaponData = PlayerInvManager.instance.weaponDatabase.GetWeaponById(weapon.weapon_id);
+
+        WeaponName.text = weaponData.wpnname;
+        WeaponType.text = weaponData.levels[0].weight;
+        WeaponLevel.text = (weapon.currentLevel + 1).ToString();
+
+        EXPBar.maxValue = weaponData.levels[weapon.currentLevel].kills_to_level;
+        EXPBar.minValue = 0;
     }
 }

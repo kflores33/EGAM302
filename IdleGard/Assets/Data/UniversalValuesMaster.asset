@@ -12,12 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec0b419e10f843449eb276c58eb521a, type: 3}
   m_Name: UniversalValuesMaster
   m_EditorClassIdentifier: Assembly-CSharp::UniversalValues
-  WeightTypes:
-  - AttackRate: 0.6
-    WeightClass: Light
-  - AttackRate: 0.9
-    WeightClass: Moderate
-  - AttackRate: 1.4
-    WeightClass: Heavy
-  - AttackRate: 4
-    WeightClass: Very Heavy
+  killReqScaler: 0.5

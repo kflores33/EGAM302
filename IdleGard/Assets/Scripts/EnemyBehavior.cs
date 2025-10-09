@@ -29,7 +29,7 @@ public class EnemyBehavior : MonoBehaviour
     public void TakeDamage(float damage, CharacterBehavior damageSource)
     {
         currentHP -= damage;
-        Debug.Log($"Dealt {damage} damge to {this.name}!");
+        //Debug.Log($"Dealt {damage} damge to {this.name}!");
 
         GeneralUIHandler.instance.SpawnDamagePopup(transform.position, damage);
 

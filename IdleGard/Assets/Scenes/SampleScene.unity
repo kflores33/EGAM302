@@ -317,8 +317,8 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -1232,6 +1232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralUIHandler
   damagePopup: {fileID: 279270358259049315, guid: 44f714c1b15bdc74899d3d5c679f88b0, type: 3}
   dmgPopupVariance: 10
+  WeaponInvSlotPrefab: {fileID: 4637208287722120895, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
+  WeaponInvParent: {fileID: 175867679}
 --- !u!1 &603295851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,11 +1501,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 242.19104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 434.83142
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2618,6 +2620,7 @@ MonoBehaviour:
   ownedWeaponDB: {fileID: 11400000, guid: f771f1b2745abd441b88c6b1e8e9dba0, type: 2}
   weaponDatabase: {fileID: 11400000, guid: 4f1510bdf4dffc14b8e4691009735164, type: 2}
   universalValues: {fileID: 11400000, guid: ed9ac7b7d98ef084fb5a672faaf9fbfe, type: 2}
+  saveManager: {fileID: 1462123264}
 --- !u!1 &1614366293
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,11 +3691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 242.19104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 434.83142
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861969745768418979, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
       propertyPath: m_LocalPosition.x

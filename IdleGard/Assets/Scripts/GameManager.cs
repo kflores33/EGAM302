@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         canSpawnNewWave = true;
+        GeneralUIHandler.instance.PopulateWeaponInventory();
     }
 
     private void Update()

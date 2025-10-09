@@ -60,7 +60,7 @@ public class UIRaycastHandler : MonoBehaviour
                 // below is where different raycast behaviors can be defined.
                 if (hitObject.GetComponent<WeaponInvSlot>() != null) { 
 
-                    Debug.Log($"hit {hitObject}");
+                    //Debug.Log($"hit {hitObject}");
 
                     if (!hitObject.GetComponent<WeaponInvSlot>().weaponIsActive)
                     {                   
@@ -80,7 +80,7 @@ public class UIRaycastHandler : MonoBehaviour
 
             if (hitInfo.collider.GetComponentInParent<WeaponBehavior>() != null)
             {
-                Debug.Log("weapon found. hover box active");
+                //Debug.Log("weapon found. hover box active");
                 WeaponBehavior wpn = hitInfo.collider.GetComponentInParent<WeaponBehavior>();
                 detailHoverPanel.ShowHoverPanel(detailHoverPanel.GetInfoWeapon(wpn));
             }
