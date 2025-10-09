@@ -8,7 +8,7 @@ public class WeaponBehavior : MonoBehaviour
     public UniversalValues universalValues;
 
     public int currentLevel { get; }
-    public float attackRate { get; set; }
+    public float attackRate { get; private set; }
 
     public bool draggable;
 

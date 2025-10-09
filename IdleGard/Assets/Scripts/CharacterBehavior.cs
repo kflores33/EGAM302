@@ -150,8 +150,8 @@ public class CharacterBehavior : MonoBehaviour
     public void SwitchStates()
     {
         if (CheckIfWaveActive() && CheckIfHasWeapon())
-        { if (CurrentState == CharacterStates.Inactive) OnSwitchToActive(); Debug.Log("Wave Active: switching back to active state"); }
+        { if (CurrentState == CharacterStates.Inactive) OnSwitchToActive(); }
         else
-        { if (CurrentState == CharacterStates.Active) OnSwitchToInactive(); Debug.Log("Character now Inactive"); }
+        { if (CurrentState == CharacterStates.Active) OnSwitchToInactive();}
     }
 }

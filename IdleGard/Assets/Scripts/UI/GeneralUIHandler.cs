@@ -26,4 +26,6 @@ public class GeneralUIHandler : MonoBehaviour
 
         DamagePopupInstance.transform.GetChild(0).GetComponent<TMP_Text>().SetText(damage.ToString());
     }
+
+    // populate weapon inventory based on owned weapons
 }

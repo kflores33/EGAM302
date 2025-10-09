@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics.Geometry;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
@@ -41,6 +43,10 @@ public class EnemyBehavior : MonoBehaviour
         GameManager.instance.DeregisterActiveEnemy(this);
         foreach (CharacterBehavior damageSource in damageSources)
         {
+            foreach (WeaponBehavior weapon in damageSource.heldWeapons)
+            {
+                PlayerInvManager.instance.RegisterKill(weapon.weaponData.weapon_id);
+            }
             damageSource.DeregisterTarget(this);
         }
 

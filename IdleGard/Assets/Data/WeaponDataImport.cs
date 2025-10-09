@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json; // used to import directly into a dictionary
 
+// NOTE: this script & related ones were AI assisted
+
 public class WeaponDataImport : MonoBehaviour
 {
     // const is used so that the values cannot be changed after compiling (i suppose?---basically, these paths will never be changed)

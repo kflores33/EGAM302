@@ -14,6 +14,9 @@ public class UniversalValues : ScriptableObject
 
     //[Range(0f, 100f)] // Add this attribute to show a slider in the editor
     //public float BloodPerKill;
+
+    [Range(0.01f, 2)]
+    public float killReqScaler = 1;
 }
 
 [System.Serializable]
