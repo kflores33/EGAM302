@@ -4,14 +4,48 @@ using System.Collections.Generic;
 
 // NOTE: this script & related ones were AI assisted
 // handles file management (nothing related to gameplay!!)
+
+[System.Serializable]
+public class GeneralPlayerSaveData
+{
+    public List<OwnedWeapon> ownedWeapons = new List<OwnedWeapon>();
+    public float bloodAccumulated;
+    public int waveCount;
+
+    public GeneralPlayerSaveData() { }
+
+    public GeneralPlayerSaveData(List<OwnedWeapon> ownedWeapons, float bloodAccumulated, int waveCount)
+    { // make sure to use "this." to eliminate ambiguity!
+        this.ownedWeapons = ownedWeapons;
+        this.bloodAccumulated = bloodAccumulated;
+        this.waveCount = waveCount;
+    }
+}
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
 
     public OwnedWeaponDB ownedWeapons; // static asset reference
     private OwnedWeaponDB runtimeWeapons; // in-memory copy (so information can be saved properly)
-
     public OwnedWeaponDB RuntimeWeapons => runtimeWeapons;
+
+    private float bloodAccumulated;
+    public void GainBlood(float blood)
+    {
+        bloodAccumulated += blood;
+        Save();
+        GeneralUIHandler.instance.UpdateBloodCounter(bloodAccumulated);
+    }
+    public float BloodAccumulated => bloodAccumulated;
+
+    private int waveCount;
+    public void IncreaseWave()
+    {
+        waveCount++;
+        Save();
+        GeneralUIHandler.instance.UpdateWaveCounter(waveCount);
+    }
+    public int WaveCount => waveCount;
 
     public WeaponDatabase weaponDatabase;
     private string savePath;
@@ -33,6 +67,20 @@ public class SaveManager : MonoBehaviour
         LoadSave();
     }
 
+    public void Save()
+    {
+        //SaveDataWrapper wrapper = new SaveDataWrapper(runtimeWeapons.ownedWeapons);
+        //string json = JsonUtility.ToJson(wrapper, true); // saves the list of owned weapons to a json format
+        GeneralPlayerSaveData data = new GeneralPlayerSaveData(
+            runtimeWeapons.ownedWeapons,
+            bloodAccumulated, waveCount);
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(savePath, json);
+
+        Debug.Log($"Saved JSON:\n{json}");
+    }
+
     public void LoadSave()
     {
         if (File.Exists(savePath)) // load save data and update OwnedWeaponDB
@@ -45,10 +93,13 @@ public class SaveManager : MonoBehaviour
                 return;
             }
             
-            SaveDataWrapper wrapper = JsonUtility.FromJson<SaveDataWrapper>(json); 
-            runtimeWeapons.ownedWeapons = wrapper.ownedWeapons; // overwrite data with info from json (save) file
+            GeneralPlayerSaveData data = JsonUtility.FromJson<GeneralPlayerSaveData>(json); 
+            runtimeWeapons.ownedWeapons = data.ownedWeapons; // overwrite data with info from json (save) file
 
-            Debug.Log($"Loaded {runtimeWeapons.ownedWeapons.Count} weapons from save.");
+            bloodAccumulated = data.bloodAccumulated;
+            waveCount = data.waveCount;
+
+            //Debug.Log($"Loaded {runtimeWeapons.ownedWeapons.Count} weapons from save.");
         }
         else
         {
@@ -62,14 +113,6 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void Save()
-    {
-        SaveDataWrapper wrapper = new SaveDataWrapper(runtimeWeapons.ownedWeapons);
-        string json = JsonUtility.ToJson(wrapper, true); // saves the list of owned weapons to a json format
-        File.WriteAllText(savePath, json);
-
-        Debug.Log($"Saved JSON:\n{json}");
-    }
     private void InitializeNewSave() // clear existing data and give the player a starter weapon
     {
         Debug.Log("Initializing new save file");
@@ -83,13 +126,13 @@ public class SaveManager : MonoBehaviour
         else { Debug.Log("No starter weapon found in database"); }
     }
 }
-[System.Serializable]
-public class SaveDataWrapper // basically chucks the weapon list into an actual serializable list (inside a class)
-{
-    public List<OwnedWeapon> ownedWeapons;
+//[System.Serializable]
+//public class SaveDataWrapper // basically chucks the weapon list into an actual serializable list (inside a class)
+//{
+//    public List<OwnedWeapon> ownedWeapons;
 
-    public SaveDataWrapper(List<OwnedWeapon> weapons)
-    {
-        ownedWeapons = weapons;
-    }
-}
+//    public SaveDataWrapper(List<OwnedWeapon> weapons)
+//    {
+//        ownedWeapons = weapons;
+//    }
+//}

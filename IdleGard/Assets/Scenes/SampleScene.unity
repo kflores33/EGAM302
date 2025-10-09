@@ -802,8 +802,6 @@ MonoBehaviour:
   universalValues: {fileID: 11400000, guid: ed9ac7b7d98ef084fb5a672faaf9fbfe, type: 2}
   hoverPanelObj: {fileID: 1094885038}
   textBox: {fileID: 667759516}
-  targetPositionOffsetX: 0
-  targetPositionOffsetY: 0
 --- !u!224 &335201080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1109,7 +1107,7 @@ GameObject:
   - component: {fileID: 588173726}
   - component: {fileID: 588173725}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UIHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1232,6 +1230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralUIHandler
   damagePopup: {fileID: 279270358259049315, guid: 44f714c1b15bdc74899d3d5c679f88b0, type: 3}
   dmgPopupVariance: 10
+  WaveCounterTxt: {fileID: 5473295}
+  BloodCounterTxt: {fileID: 2039331095}
   WeaponInvSlotPrefab: {fileID: 4637208287722120895, guid: 4330a9f33a1e678478dbfb5a94330286, type: 3}
   WeaponInvParent: {fileID: 175867679}
 --- !u!1 &603295851
@@ -2620,7 +2620,6 @@ MonoBehaviour:
   ownedWeaponDB: {fileID: 11400000, guid: f771f1b2745abd441b88c6b1e8e9dba0, type: 2}
   weaponDatabase: {fileID: 11400000, guid: 4f1510bdf4dffc14b8e4691009735164, type: 2}
   universalValues: {fileID: 11400000, guid: ed9ac7b7d98ef084fb5a672faaf9fbfe, type: 2}
-  saveManager: {fileID: 1462123264}
 --- !u!1 &1614366293
 GameObject:
   m_ObjectHideFlags: 0

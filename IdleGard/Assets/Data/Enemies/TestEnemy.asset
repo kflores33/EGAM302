@@ -17,5 +17,5 @@ MonoBehaviour:
   enemy_HP: 30
   atk_strength: 3
   weight_class: Moderate
-  blood_value: 0
-  image: {fileID: 0}
+  blood_value: 20
+  image: {fileID: 2100000, guid: 009a2c6d11f605c46b432023d0b3b962, type: 2}

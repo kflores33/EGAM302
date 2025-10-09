@@ -50,6 +50,8 @@ public class EnemyBehavior : MonoBehaviour
             damageSource.DeregisterTarget(this);
         }
 
+        SaveManager.instance.GainBlood(enemyData.blood_value);
+
         Debug.Log($"Defeated {this.name}!");
         Destroy(gameObject);
     }

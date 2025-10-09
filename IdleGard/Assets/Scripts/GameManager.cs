@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
             SpawnerBehavior.instance.RequestSpawnEnemy(chosenEnemy, EnemyPositionList, enemyCount);
             Debug.Log("spawning new Wave");
 
+            SaveManager.instance.IncreaseWave();
             canSpawnNewWave = false;
         }
     }

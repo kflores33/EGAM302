@@ -35,11 +35,24 @@ public class GeneralUIHandler : MonoBehaviour
     {
         // convert position to screenspace: https://stackoverflow.com/questions/73332594/convert-world-space-gameobject-position-to-screen-space-canvas-ui-position
         Vector3 screenPos = Camera.main.WorldToScreenPoint(position);
-        Vector3 spawnPos = new Vector2(screenPos.x + Random.Range(-dmgPopupVariance, dmgPopupVariance), screenPos.y + Random.Range(-dmgPopupVariance, dmgPopupVariance));
+        Vector3 spawnPos = new Vector2(screenPos.x + UnityEngine.Random.Range(-dmgPopupVariance, dmgPopupVariance), screenPos.y + UnityEngine.Random.Range(-dmgPopupVariance, dmgPopupVariance));
 
         GameObject DamagePopupInstance = Instantiate(damagePopup, spawnPos, Quaternion.identity, this.transform);
 
         DamagePopupInstance.transform.GetChild(0).GetComponent<TMP_Text>().SetText(damage.ToString());
+    }
+
+    public TMP_Text WaveCounterTxt;
+    public void UpdateWaveCounter(int waveNum)
+    {
+        WaveCounterTxt.text = $"Wave {waveNum.ToString()}";
+    }
+
+    public TMP_Text BloodCounterTxt;
+    public void UpdateBloodCounter(float bloodNum)
+    {
+        // round blood num to 2 decimal places
+        BloodCounterTxt.text = $"{bloodNum.ToString("#.00")} mL";
     }
 
     // populate weapon inventory based on owned weapons
