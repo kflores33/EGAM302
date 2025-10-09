@@ -37,13 +37,16 @@ public class WeaponInvSlot : MonoBehaviour
         }
         else { BKGDPanel.color = panelInactive; }
 
-        EXPBar.value = saveData.killCount;
+        if (saveData != null)
+        {
+            EXPBar.value = saveData.killCount;
+        }
     }
 
     public void Initialize(OwnedWeapon weapon)
     {
         saveData = weapon;
-        weaponData = PlayerInvManager.instance.weaponDatabase.GetWeaponById(weapon.weapon_id);
+        weaponData = weapon.weaponData;
 
         WeaponName.text = weaponData.wpnname;
         WeaponType.text = weaponData.levels[0].weight;

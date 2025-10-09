@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GeneralUIHandler : MonoBehaviour
 {
@@ -11,6 +12,20 @@ public class GeneralUIHandler : MonoBehaviour
             instance = this;
         }
         else { Destroy(this); }
+    }
+    void Start()
+    {
+        StartCoroutine(WaitForLoad());
+    }
+
+    IEnumerator WaitForLoad()
+    {
+        // Wait until SaveManager has loaded and has data
+        yield return new WaitUntil(() => SaveManager.instance.RuntimeWeapons != null);
+        yield return new WaitUntil(() => SaveManager.instance.RuntimeWeapons != null &&
+                                         SaveManager.instance.RuntimeWeapons.ownedWeapons.Count > 0); // wait until there's at least one weapon ready to display
+
+        PopulateWeaponInventory();
     }
 
     public GameObject damagePopup;

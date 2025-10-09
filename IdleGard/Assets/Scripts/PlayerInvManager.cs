@@ -8,13 +8,13 @@ public class PlayerInvManager : MonoBehaviour
     {
         if  (instance == null) instance = this;
         else Destroy(this);
+
+        ownedWeaponDB = SaveManager.instance.RuntimeWeapons; // make sure the correct thing is referenced
     }
 
     public OwnedWeaponDB ownedWeaponDB;
     public WeaponDatabase weaponDatabase;
     public UniversalValues universalValues;
-
-    public SaveManager saveManager;
 
     public void RegisterKill(string weapon_id)
     {
@@ -23,7 +23,7 @@ public class PlayerInvManager : MonoBehaviour
 
         saveData.killCount++;
         var nextLevel = saveData.currentLevel + 1;
-        var reqKills = weaponDatabase.GetWeaponById(weapon_id).levels[saveData.currentLevel].kills_to_level;
+        var reqKills = saveData.weaponData.levels[saveData.currentLevel].kills_to_level;
             float killScaler = universalValues.killReqScaler;
             float toRound = reqKills * killScaler;
         reqKills = (int)Mathf.Round(toRound);
@@ -34,7 +34,7 @@ public class PlayerInvManager : MonoBehaviour
             saveData.killCount = 0;
         }
 
-        saveManager.Save();
+        SaveManager.instance.Save();
         Debug.Log($"Killed enemy. Kill Count = {saveData.killCount}");
     }
 }

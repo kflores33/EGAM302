@@ -24,14 +24,17 @@ public class OwnedWeaponDB : ScriptableObject
             weapon_id = weapon.weapon_id,
             currentLevel = 0,
             killCount = 0,
+            weaponData = weapon
         });
     }
 }
+
+[System.Serializable]
 public class OwnedWeapon
 {
     public string weapon_id;
     public int currentLevel;
     public int killCount; // can subtract from level up requirement to get # of kills till next level
 
-    //[System.NonSerialized] public WeaponScriptable weaponData;
+    [System.NonSerialized] public WeaponScriptable weaponData;
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec0b419e10f843449eb276c58eb521a, type: 3}
   m_Name: UniversalValuesMaster
   m_EditorClassIdentifier: Assembly-CSharp::UniversalValues
-  killReqScaler: 0.5
+  killReqScaler: 0.1
