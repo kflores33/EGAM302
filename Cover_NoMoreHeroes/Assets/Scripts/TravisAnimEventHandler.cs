@@ -36,4 +36,19 @@ public class TravisAnimEventHandler : MonoBehaviour
                 break;
         }
     }
+
+    public UnityEvent<float> OnApplyMoveForce;
+    void MoveForceAnimEvent(float moveForce)
+    {
+        OnApplyMoveForce?.Invoke(moveForce);
+        Debug.Log("Applying Move Force: " + moveForce);
+    }
+
+    public UnityEvent<bool> OnApplyRunLoop;
+    void RunProgress(int canLoop)
+    {
+        bool loop = canLoop == 1 ? true : false;
+
+        OnApplyRunLoop?.Invoke(loop);
+    }
 }

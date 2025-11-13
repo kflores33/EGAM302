@@ -7,22 +7,38 @@ public class TravisInputHandler : MonoBehaviour
 {
     Animator animator;
     Keyboard kbd;
+    Rigidbody rb;
+
+    [SerializeField] private PlayerInput playerInput;
+    private InputAction moveAction;
+    private InputAction lowATKAction;
+    private InputAction highATKAction;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         kbd = Keyboard.current;
+        rb = GetComponent<Rigidbody>();
+
+        moveAction = playerInput.actions["Move"];
+        lowATKAction = playerInput.actions["LowAttack"];
+        highATKAction = playerInput.actions["HighAttack"];
     }
 
     public int combo = 0;
     public bool attackQd; // is there an attack queued up?
     public bool canPlayQueued; // can the queued attack be played?
 
+    [Header("Movement Control")]
+    [SerializeField] bool canMove = true;
+    public float moveSpeed = 5f;
+
     public enum Stance
     {
         Low,
         High
     }
+
     [Header("Stance Info")]
     public Stance currentStance = Stance.Low;
     public Stance previousStance = Stance.Low;
@@ -44,24 +60,118 @@ public class TravisInputHandler : MonoBehaviour
     };
     [SerializeField] int attackInString;
 
+    [Header("Move Animations")]
+    bool canLoopRun = false;
+    bool canStartIdle = true;
+    bool canStartRun = false;
+
     private void Update()
     {
-        if (kbd.qKey.wasPressedThisFrame)
+        if (lowATKAction.WasPressedThisFrame())
         {
             HandleAttackInput(0); // Low stance
         }
-        if (kbd.eKey.wasPressedThisFrame)
+        if (highATKAction.WasPressedThisFrame())
         {
             HandleAttackInput(1); // High stance
         }
+
+        if (canMove)
+            GetMoveInput();
 
         if (canPlayQueued)
         {
             PlayQueuedAttack();
         }
-        else if (attackQd && !canPlayQueued)
+
+        if (isMoving && canStartRun)
         {
-            //Debug.Log("Attack has been queued but cannot play yet.");
+            //animator.Play("RUN");
+            canStartRun = false;
+            animator.Play("RUN");
+            canStartIdle = true;
+        }
+        else if (!isMoving && canStartIdle)
+        {
+            canStartIdle = false;
+            animator.Play("IdleBlend");
+            canStartRun = true;
+        }
+    }
+
+    bool isMoving;
+    bool applyAttackMovement;
+    float attackMoveAmount = 0.5f;
+    private void FixedUpdate()
+    {
+        Vector2 movementInput = moveAction.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
+
+        ApplyMovement(movementInput, movement);
+
+        if (applyAttackMovement)
+        {
+            // apply slight forward movement during attack
+            applyAttackMovement = false;
+            rb.MovePosition(transform.position + transform.forward * attackMoveAmount);
+        }
+    }
+
+    //public void OnRunAnimUpdate(bool canLoop)
+    //{
+    //    if (canLoop)
+    //    {
+    //        canLoopRun = true;
+    //    }
+    //    else
+    //    {
+    //        canLoopRun = false;
+    //    }
+    //}
+
+    public void OnApplyAttackMovement(float moveAmount)
+    {
+        applyAttackMovement = true;
+        attackMoveAmount = moveAmount;
+
+        //Debug.Log("Applying attack movement: " + moveAmount);
+    }
+
+    void GetMoveInput()
+    {
+        Vector2 movementInput = moveAction.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
+
+        // if position will change, apply movement
+        if (movement != Vector3.zero)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+    }
+    void ApplyMovement(Vector2 movementInput, Vector3 movement)
+    {
+        // change direction based on camera
+        Vector3 camForward = Camera.main.transform.forward; // cam reference
+                camForward.y = 0; // flatten on y axis
+        Quaternion camRotation = Quaternion.LookRotation(camForward); // find the rotation of the camera on the y axis only
+
+        movement = camRotation * movement; // update movement vector to be relative to camera
+
+        // rotate towards movement direction
+        if (movement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+            rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.deltaTime)); // "maxDegreesDelta" is turn speed
+        }
+
+        if (isMoving)
+        {
+            rb.MovePosition(transform.position + movement * Time.deltaTime * moveSpeed);
+            canStartRun = true;
         }
     }
 
@@ -84,10 +194,13 @@ public class TravisInputHandler : MonoBehaviour
     public void OnAttackStart()
     {
         canPlayQueued = false;
+        canMove = false;
+        isMoving = false;
     }
     public void OnCanPlayQueued()
     {
         canPlayQueued = true;
+        canMove = true;
     }
     public void OnComboBreak()
     {
