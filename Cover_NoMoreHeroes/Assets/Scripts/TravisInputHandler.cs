@@ -61,7 +61,7 @@ public class TravisInputHandler : MonoBehaviour
         }
         else if (attackQd && !canPlayQueued)
         {
-            Debug.Log("Attack has been queued but cannot play yet.");
+            //Debug.Log("Attack has been queued but cannot play yet.");
         }
     }
 
@@ -112,7 +112,7 @@ public class TravisInputHandler : MonoBehaviour
 
         if (currentStance != previousStance) attackInString = 1;
         
-        Debug.Log("Starting new combo");
+        //Debug.Log("Starting new combo");
     }
 
     public void PlayQueuedAttack()

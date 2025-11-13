@@ -24,15 +24,15 @@ public class TravisAnimEventHandler : MonoBehaviour
         {
             case QueueAnimEvent.CanQueueCombo:
                 OnCanQueueCombo?.Invoke();
-                Debug.Log("Attack Animation Started");
+                //Debug.Log("Attack Animation Started");
                 break;
             case QueueAnimEvent.CanPlayQueued:
                 OnCanPlayQueued?.Invoke();
-                Debug.Log("Next Attack can Play");
+                //Debug.Log("Next Attack can Play");
                 break;
             case QueueAnimEvent.CanPlayNonCombo:
                 OnCanPlayNonCombo?.Invoke();
-                Debug.Log("Combo dropped, can play 1st attack");
+                //Debug.Log("Combo dropped, can play 1st attack");
                 break;
         }
     }
