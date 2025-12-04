@@ -1,11 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
+
+public interface IDamageableObj
+{
+    public void TakeDamage(float damage);
+}
 
 public class PlayerCharacter : MonoBehaviour
 {
-    Rigidbody rb;
+    UnityEvent OnTakeDamage;
 
+    // references
+    Rigidbody rb;
+    Animator animator;
     PlayerInputManager inputManager;
+    CharacterController characterController;
+
+    bool applyRootMotion;
+
+    // unity input system
     [SerializeField] private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction parryAction;
@@ -14,7 +28,11 @@ public class PlayerCharacter : MonoBehaviour
     [Header("Movement Control")]
     [SerializeField] bool acceptMoveInput = true;
     bool isMoving = false;
-    public float moveSpeed = 5f;
+    public float moveSpeedWalk = 4f;
+    public float moveSpeedRun = 8f;
+
+    bool canStartMoveAnim = true;
+    bool canStartIdleAnim;
 
     public enum ParryState
     {
@@ -31,6 +49,8 @@ public class PlayerCharacter : MonoBehaviour
     {
         inputManager = PlayerInputManager.Instance;
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
 
         moveAction = playerInput.actions["Move"];
         parryAction = playerInput.actions["Block"];
@@ -54,11 +74,11 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Update()
     {
-        if (inputManager.ParryPressed)
+        if (parryAction.WasPressedThisFrame())
         {
-            if (inputManager.Movement != Vector2.zero)
+            if (moveAction.ReadValue<Vector2>() != Vector2.zero)
             {
-                lastParryDirection = inputManager.Movement;
+                lastParryDirection = moveAction.ReadValue<Vector2>();
             }
             OnInitialParry();
         }
@@ -66,6 +86,20 @@ public class PlayerCharacter : MonoBehaviour
         if (acceptMoveInput)
         {
             GetMoveInput();
+        }
+
+        // handle move/idle animations
+        if (isMoving && canStartMoveAnim)
+        {
+            canStartMoveAnim = false;
+            animator.Play("Movement");
+            canStartIdleAnim = true;
+        }
+        else if (!isMoving && canStartIdleAnim)
+        {
+            canStartIdleAnim = false;
+            animator.Play("Idle");
+            canStartMoveAnim = true;
         }
     }
 
@@ -75,6 +109,11 @@ public class PlayerCharacter : MonoBehaviour
         Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
 
         ApplyMovement(movementInput, movement);
+    }
+
+    public void OnApplyRunLoop(bool apply)
+    {
+        canStartMoveAnim = apply ? true : false;
     }
 
     void GetMoveInput()
@@ -91,22 +130,43 @@ public class PlayerCharacter : MonoBehaviour
         {
             isMoving = false;
         }
+
+
+        animator.SetFloat("Speed", movementInput.magnitude);
     }
     void ApplyMovement(Vector2 movementInput, Vector3 movement)
     {
         var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
-        var isoMovement = matrix.MultiplyPoint3x4(movement);
+        var isoMovement = matrix.MultiplyPoint3x4(movement.normalized);
 
         // rotate towards movement direction
         if (isoMovement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(isoMovement, Vector3.up);
-            rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.deltaTime)); // "maxDegreesDelta" is turn speed
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.deltaTime); // "maxDegreesDelta" is turn speed
+
+            transform.rotation = finalRotation;
         }
+
+       //set speed for walk vs run 
+       float finalMoveSpeed = 0;
+
+        if (movementInput.magnitude > 0 && movementInput.magnitude <= 0.5f) finalMoveSpeed = moveSpeedWalk;
+        else if (movementInput.magnitude > 0.5) finalMoveSpeed = moveSpeedRun;
 
         if (isMoving)
         {
-            rb.MovePosition(transform.position + isoMovement * Time.deltaTime * moveSpeed);
+            characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
+        }
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (applyRootMotion)
+        {
+            Vector3 velocity = animator.deltaPosition;
+            characterController.Move(velocity);
+            transform.rotation *= animator.deltaRotation;
         }
     }
 }
