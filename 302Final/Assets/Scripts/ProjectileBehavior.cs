@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
-    public float startDelay = 0.3f;
+    public float startDelay = 0.6f;
     public float speed = 16f;
     public Vector3 direction;
 
     public float lifetime = 10f;
 
     bool canGo = false;
+
+    bool isBlocked = false;
 
     private void Start()
     {
@@ -34,5 +36,19 @@ public class ProjectileBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
         canGo = true;
+    }
+
+    public void OnBlock()
+    {
+        canGo = false;
+        isBlocked = true; 
+
+        StartCoroutine(OnBlockCoroutine(1));
+    }
+
+    IEnumerator OnBlockCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

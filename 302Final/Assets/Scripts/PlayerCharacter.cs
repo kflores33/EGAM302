@@ -59,12 +59,11 @@ public class PlayerCharacter : MonoBehaviour
     }
 
     // parry ability
-    public void OnInitialParry()
+    public void OnInitialParry() // called when parry input is detected
     {
         // check directional input to determine parry direction (if there's no directional input, return)
         if (lastParryDirection == Vector2.zero) return;
 
-        //Debug.Log("Parry initiated in direction: " + lastParryDirection);
         // should have a short delay before input is accepted again
         PlayAnimation("ParryStance", false, 0.1f);
         
@@ -73,9 +72,13 @@ public class PlayerCharacter : MonoBehaviour
     public void OnOvercommitParry()
     {
         // can be activated on block (otherwise return)
+        if (lastParryDirection == Vector2.zero) return;
+
+        ResetParryState();
+        PlayAnimation("Overcommit", true, 0.1f);
     }
 
-    void DetectParryableObject()
+    void DetectParryableObject() // called during Anticipating state in Update()
     {
         // boxcast in front of player (player rotation is already aligned with block direction)
         if (currentParryState != ParryState.Anticipating) return;
@@ -90,6 +93,9 @@ public class PlayerCharacter : MonoBehaviour
             if (hitInfo.collider != null)
             {
                 hitInfo.collider.GetComponentInParent<Parryable>()?.OnBlock();
+
+                currentParryState = ParryState.Blocking;
+                PlayAnimation("ParryReact", true, 0.1f);
             }
         }
     }
@@ -98,7 +104,14 @@ public class PlayerCharacter : MonoBehaviour
     public void OnAnimationEnd()
     {
         Debug.Log("Current animation ended.");
-        currentParryState = ParryState.None;
+
+        // Check which animation is currently playing
+        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        //Debug.Log($"Current animation: {GetAnimationName(stateInfo)}");
+
+        if (currentParryState != ParryState.None)
+            currentParryState = ParryState.None;
+
         if (canStartMoveAnim == false)
             canStartMoveAnim = true;
     }
@@ -106,35 +119,40 @@ public class PlayerCharacter : MonoBehaviour
     {
         canStartMoveAnim = apply ? true : false;
     }
+
     #endregion
+
+    void ResetParryState()
+    {
+        currentParryState = ParryState.None;
+        lastParryDirection = Vector2.zero;
+    }
 
     private void Update()
     {
         if (parryAction.WasPressedThisFrame())
         {
+            if (currentParryState == ParryState.Anticipating) return; // already parrying
+
             if (moveAction.ReadValue<Vector2>() != Vector2.zero)
             {
                 lastParryDirection = moveAction.ReadValue<Vector2>();
             }
             OnInitialParry();
         }
-
-        if (currentParryState == ParryState.Anticipating)
+        if (overcommitAction.WasPressedThisFrame())
         {
-            DetectParryableObject();
+            if (currentParryState != ParryState.Blocking) return; // can only overcommit when blocking
+
+            if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+            {
+                lastParryDirection = moveAction.ReadValue<Vector2>();
+            }
+            OnOvercommitParry();
         }
 
+        HandleParryState();
 
-        if (currentParryState == ParryState.None)
-        {
-            acceptMoveInput = true;
-        }
-        else
-        {
-            acceptMoveInput = false;
-        }
-
-        
         if (acceptMoveInput)
             GetMoveInput();
 
@@ -161,6 +179,68 @@ public class PlayerCharacter : MonoBehaviour
         ApplyMovement(movementInput, movement);
     }
 
+    private void HandleParryState() // to be called in Update() | manages input acceptance and parryable object detection
+    {
+        if (currentParryState == ParryState.Anticipating)
+        {
+            DetectParryableObject();
+
+            // Debug current animation progress
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("ParryStance"))
+            {
+                float normalizedTime = stateInfo.normalizedTime;
+                //Debug.Log($"ParryStance animation progress: {normalizedTime * 100}%");
+
+                // If animation is interrupted (normalizedTime < 1), manually reset
+                if (normalizedTime < 1 && !animator.IsInTransition(0))
+                {
+                    // Check if we switched to a different animation
+                    AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+                    if (clipInfo.Length > 0 && clipInfo[0].clip.name != "ParryStance")
+                    {
+                        Debug.Log("Parry animation was interrupted!");
+                        ResetParryState();
+                    }
+                }
+            }
+
+        }
+
+        if (currentParryState == ParryState.Blocking)
+        {
+            // Debug current animation progress
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("ParryReact"))
+            {
+                float normalizedTime = stateInfo.normalizedTime;
+                //Debug.Log($"ParryStance animation progress: {normalizedTime * 100}%");
+
+                // If animation is interrupted (normalizedTime < 1), manually reset
+                if (normalizedTime < 1 && !animator.IsInTransition(0))
+                {
+                    // Check if we switched to a different animation
+                    AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+                    if (clipInfo.Length > 0 && clipInfo[0].clip.name != "ParryReact")
+                    {
+                        //Debug.Log("Parry animation was interrupted!");
+                        ResetParryState();
+                    }
+                }
+            }
+        }
+
+        if (currentParryState == ParryState.None)
+        {
+            if (acceptMoveInput == false)
+                acceptMoveInput = true;
+        }
+        else
+        {
+            if (acceptMoveInput == true)
+                acceptMoveInput = false;
+        }
+    } 
 
     #region Movement Functions
     void GetMoveInput()
@@ -201,14 +281,14 @@ public class PlayerCharacter : MonoBehaviour
         if (movementInput.magnitude > 0 && movementInput.magnitude <= 0.5f) finalMoveSpeed = moveSpeedWalk;
         else if (movementInput.magnitude > 0.5) finalMoveSpeed = moveSpeedRun;
 
-        if (isMoving)
+        if (isMoving && currentParryState != ParryState.Anticipating)
         {
             characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
         }
     }
     #endregion
 
-    #region Animation Functions
+    #region Animation Playback
     private void OnAnimatorMove()
     {
         if (applyRootMotion)
@@ -232,6 +312,38 @@ public class PlayerCharacter : MonoBehaviour
     }
     #endregion
 
+    #region Debugging
+    [Header("Animation Debug")]
+    [SerializeField] bool debugAnimationEvents = true;
+
+    private float GetCurrentAnimationFrame()
+    {
+        if (animator.GetCurrentAnimatorClipInfo(0).Length > 0)
+        {
+            var clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+            var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            return stateInfo.normalizedTime * clip.frameRate * clip.length;
+        }
+        return 0;
+    }
+    private string GetAnimationName(AnimatorStateInfo stateInfo)
+    {
+        // You might need a better way to identify animations
+        return stateInfo.IsName("ParryStance") ? "ParryStance" :
+               stateInfo.IsName("Movement") ? "Movement" :
+               stateInfo.IsName("Idle") ? "Idle" : "Unknown Animation";
+    }
+
+    private void OnGUI()
+    {
+        if (!debugAnimationEvents) return;
+
+        GUILayout.BeginArea(new Rect(10, 10, 300, 200));
+        GUILayout.Label($"Current Parry State: {currentParryState}");
+        GUILayout.Label($"Last Animation Frame: {GetCurrentAnimationFrame()}");
+        GUILayout.Label($"Is Animator Playing: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
+        GUILayout.EndArea();
+    }
     private void OnDrawGizmosSelected()
     {
         // draw boxcast area
@@ -240,4 +352,5 @@ public class PlayerCharacter : MonoBehaviour
         Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
         Gizmos.DrawWireCube(boxCenter, halfExtents * 2);
     }
+    #endregion
 }
