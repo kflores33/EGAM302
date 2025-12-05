@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5079423873090492220}
   - component: {fileID: 9176325141466387950}
   - component: {fileID: 4299239521116298414}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3465452201128303416}
   - component: {fileID: 4972387588041225432}
-  m_Layer: 0
+  - component: {fileID: 4560465741054181149}
+  m_Layer: 3
   m_Name: BasicProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,3 +161,23 @@ MonoBehaviour:
   speed: 10
   direction: {x: 0, y: 0, z: 0}
   lifetime: 5
+--- !u!114 &4560465741054181149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268995992667045022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8dc01ae08de0e42adb9f27aa9c5ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Parryable
+  OnAttackBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackParried:
+    m_PersistentCalls:
+      m_Calls: []
+  wasBlocked: 0
+  wasParried: 0

@@ -16,6 +16,7 @@ public class PlayerCharacter : MonoBehaviour
     Animator animator;
     PlayerInputManager inputManager;
     CharacterController characterController;
+    [SerializeField] LayerMask parryableLayerMask;
 
     bool applyRootMotion;
 
@@ -27,7 +28,7 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("Movement Control")]
     [SerializeField] bool acceptMoveInput = true;
-    bool isMoving = false;
+    [SerializeField] bool isMoving = false;
     public float moveSpeedWalk = 4f;
     public float moveSpeedRun = 8f;
 
@@ -60,17 +61,52 @@ public class PlayerCharacter : MonoBehaviour
     // parry ability
     public void OnInitialParry()
     {
-        // when player performs parry input
         // check directional input to determine parry direction (if there's no directional input, return)
         if (lastParryDirection == Vector2.zero) return;
 
-        Debug.Log("Parry initiated in direction: " + lastParryDirection);
+        //Debug.Log("Parry initiated in direction: " + lastParryDirection);
         // should have a short delay before input is accepted again
+        PlayAnimation("ParryStance", false, 0.1f);
+        
+        currentParryState = ParryState.Anticipating;
     }
     public void OnOvercommitParry()
     {
         // can be activated on block (otherwise return)
     }
+
+    void DetectParryableObject()
+    {
+        // boxcast in front of player (player rotation is already aligned with block direction)
+        if (currentParryState != ParryState.Anticipating) return;
+
+        Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
+        Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
+        float maxDistance = 1f;
+
+        bool HitDetect = Physics.BoxCast(boxCenter, halfExtents, transform.forward, out RaycastHit hitInfo, Quaternion.identity, maxDistance, parryableLayerMask.value, QueryTriggerInteraction.Collide);
+        if (HitDetect)
+        {
+            if (hitInfo.collider != null)
+            {
+                hitInfo.collider.GetComponentInParent<Parryable>()?.OnBlock();
+            }
+        }
+    }
+
+    #region Animation Event Callbacks
+    public void OnAnimationEnd()
+    {
+        Debug.Log("Current animation ended.");
+        currentParryState = ParryState.None;
+        if (canStartMoveAnim == false)
+            canStartMoveAnim = true;
+    }
+    public void OnApplyRunLoop(bool apply)
+    {
+        canStartMoveAnim = apply ? true : false;
+    }
+    #endregion
 
     private void Update()
     {
@@ -83,22 +119,36 @@ public class PlayerCharacter : MonoBehaviour
             OnInitialParry();
         }
 
-        if (acceptMoveInput)
+        if (currentParryState == ParryState.Anticipating)
         {
-            GetMoveInput();
+            DetectParryableObject();
         }
+
+
+        if (currentParryState == ParryState.None)
+        {
+            acceptMoveInput = true;
+        }
+        else
+        {
+            acceptMoveInput = false;
+        }
+
+        
+        if (acceptMoveInput)
+            GetMoveInput();
 
         // handle move/idle animations
         if (isMoving && canStartMoveAnim)
         {
             canStartMoveAnim = false;
-            animator.Play("Movement");
+            PlayAnimation("Movement", false, 0.2f);
             canStartIdleAnim = true;
         }
         else if (!isMoving && canStartIdleAnim)
         {
             canStartIdleAnim = false;
-            animator.Play("Idle");
+            PlayAnimation("Idle", true, 0.2f);
             canStartMoveAnim = true;
         }
     }
@@ -111,11 +161,8 @@ public class PlayerCharacter : MonoBehaviour
         ApplyMovement(movementInput, movement);
     }
 
-    public void OnApplyRunLoop(bool apply)
-    {
-        canStartMoveAnim = apply ? true : false;
-    }
 
+    #region Movement Functions
     void GetMoveInput()
     {
         Vector2 movementInput = moveAction.ReadValue<Vector2>();
@@ -131,9 +178,9 @@ public class PlayerCharacter : MonoBehaviour
             isMoving = false;
         }
 
-
         animator.SetFloat("Speed", movementInput.magnitude);
     }
+
     void ApplyMovement(Vector2 movementInput, Vector3 movement)
     {
         var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
@@ -159,7 +206,9 @@ public class PlayerCharacter : MonoBehaviour
             characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
         }
     }
+    #endregion
 
+    #region Animation Functions
     private void OnAnimatorMove()
     {
         if (applyRootMotion)
@@ -168,5 +217,27 @@ public class PlayerCharacter : MonoBehaviour
             characterController.Move(velocity);
             transform.rotation *= animator.deltaRotation;
         }
+    }
+    private void PlayAnimation(string animName, bool applyRootMotion = false, float transitionAmount = 0)
+    {
+        this.applyRootMotion = applyRootMotion;
+
+        if (transitionAmount > 0)
+        {
+            animator.CrossFade(animName, transitionAmount);
+            return;
+        }
+        else
+            animator.Play(animName);
+    }
+    #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        // draw boxcast area
+        Gizmos.color = Color.red;
+        Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
+        Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
+        Gizmos.DrawWireCube(boxCenter, halfExtents * 2);
     }
 }

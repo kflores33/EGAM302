@@ -6,12 +6,14 @@ public class PlayerAnimHandler : MonoBehaviour
     public enum ParryQueueAnimEvent
     {
         CanQueueInput, // queue player input (can be another parry 
-        CanPlayQueued // play animation associated with queued input
+        CanPlayQueued, // play animation associated with queued input
+        AnimationEnd // end of parry animation
     }
     public ParryQueueAnimEvent currentParryReactEvent;
 
     public UnityEvent OnCanQueueInput;
     public UnityEvent OnCanPlayQueued;
+    public UnityEvent OnAnimationEnd;
 
     void HandleParryAnimEvent(int currentState)
     {
@@ -24,6 +26,9 @@ public class PlayerAnimHandler : MonoBehaviour
                 break;
             case ParryQueueAnimEvent.CanPlayQueued:
                 OnCanPlayQueued?.Invoke();
+                break;
+            case ParryQueueAnimEvent.AnimationEnd:
+                OnAnimationEnd?.Invoke();
                 break;
         }
     }

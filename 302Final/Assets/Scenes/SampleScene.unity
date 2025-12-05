@@ -496,7 +496,7 @@ Transform:
   m_GameObject: {fileID: 916162851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -516,8 +516,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713dce0c35d90554fab56f0fe0147447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
+  parryableLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   playerInput: {fileID: 1293107591}
   acceptMoveInput: 1
+  isMoving: 0
   moveSpeedWalk: 2
   moveSpeedRun: 6.37
   currentParryState: 0
@@ -590,6 +594,21 @@ MonoBehaviour:
   OnCanPlayQueued:
     m_PersistentCalls:
       m_Calls: []
+  OnAnimationEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 916162853}
+        m_TargetAssemblyTypeName: PlayerCharacter, Assembly-CSharp
+        m_MethodName: OnAnimationEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnApplyRunLoop:
     m_PersistentCalls:
       m_Calls:
@@ -819,7 +838,7 @@ Transform:
   m_GameObject: {fileID: 1248610117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1251,7 +1270,7 @@ Transform:
   m_GameObject: {fileID: 1934783501}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -5.381262, y: 6.838654, z: -5.381262}
+  m_LocalPosition: {x: -5.381262, y: 6.818654, z: -5.381262}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
