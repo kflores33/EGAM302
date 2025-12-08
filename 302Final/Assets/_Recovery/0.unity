@@ -178,7 +178,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: -10
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -5352,21 +5352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713dce0c35d90554fab56f0fe0147447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
-  OnTimeSlowed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1934783505}
-        m_TargetAssemblyTypeName: CameraZoom, Assembly-CSharp
-        m_MethodName: OnSlow
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   parryableLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -5376,10 +5361,7 @@ MonoBehaviour:
   moveSpeedWalk: 2
   moveSpeedRun: 6.37
   currentParryState: 0
-  timeSlowAmount: 0.35
-  timeSlowDuration: 0.5
-  slowRate: 2
-  speedUpRate: 4
+  timeSlowAmount: 0.5
   debugAnimationEvents: 1
 --- !u!54 &916162855
 Rigidbody:
@@ -10938,7 +10920,6 @@ GameObject:
   - component: {fileID: 1934783503}
   - component: {fileID: 1934783502}
   - component: {fileID: 1934783504}
-  - component: {fileID: 1934783505}
   m_Layer: 0
   m_Name: IsometricCamera
   m_TagString: Untagged
@@ -10972,7 +10953,7 @@ MonoBehaviour:
   Lens:
     FieldOfView: 60
     OrthographicSize: 5
-    NearClipPlane: 0.01
+    NearClipPlane: -10
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -10998,7 +10979,7 @@ Transform:
   m_GameObject: {fileID: 1934783501}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -11.700945, y: 11.978655, z: -11.700945}
+  m_LocalPosition: {x: -5.381262, y: 6.818654, z: -5.381262}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11017,7 +10998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePositionComposer
-  CameraDistance: 20.32
+  CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0.21}
@@ -11036,26 +11017,6 @@ MonoBehaviour:
     Time: 0.039
     Smoothing: 0
     IgnoreY: 0
---- !u!114 &1934783505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934783501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c81c92aabfd18a1428327ff71b18167e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraZoom
-  defaultOrthoSize: 5
-  defaultScreenPosition: {x: 0, y: 2}
-  zoomedInOrthoSize: 3.82
-  zoomedInScreenPosition: {x: 0, y: 0}
-  canZoomInCamera: 0
-  canZoomOutCamera: 0
-  zoomInRate: 20
-  zoomOutRate: 15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

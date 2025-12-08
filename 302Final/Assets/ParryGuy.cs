@@ -298,7 +298,7 @@ public partial class @ParryGuy: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a8d5021d-1353-4378-8785-a734eb86001c"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -331,7 +331,7 @@ public partial class @ParryGuy: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""72bc048d-8f45-4af6-9779-5262e3ba8894"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",

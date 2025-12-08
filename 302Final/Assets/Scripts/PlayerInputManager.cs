@@ -25,6 +25,7 @@ public class PlayerInputManager : MonoBehaviour
     private void OnDisable() => inputManager.Disable();
 
     public Vector2 Movement => inputManager.Player.Move.ReadValue<Vector2>();
+    public Vector2 Look => inputManager.Player.Look.ReadValue<Vector2>();
     public bool ParryPressed => inputManager.Player.Block.WasPressedThisFrame();
     public bool OvercommitPressed => inputManager.Player.Commit.WasPressedThisFrame();
 

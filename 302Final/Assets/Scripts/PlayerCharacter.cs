@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Collections;
+using Unity.VisualScripting;
 
 public interface IDamageableObj
 {
@@ -10,6 +12,7 @@ public interface IDamageableObj
 public class PlayerCharacter : MonoBehaviour
 {
     UnityEvent OnTakeDamage;
+    public UnityEvent<bool> OnTimeSlowed;
 
     // references
     Rigidbody rb;
@@ -23,6 +26,7 @@ public class PlayerCharacter : MonoBehaviour
     // unity input system
     [SerializeField] private PlayerInput playerInput;
     private InputAction moveAction;
+    private InputAction lookAction;
     private InputAction parryAction;
     private InputAction overcommitAction;
 
@@ -43,8 +47,18 @@ public class PlayerCharacter : MonoBehaviour
     }
     public ParryState currentParryState = ParryState.None;
 
-    bool isPerfectParry;
+    [Header("Time Slow Settings")]
+    public float timeSlowAmount = 0.5f;
+    public float timeSlowDuration = 1;
+    public float slowRate = 5;
+    public float speedUpRate = 5;
+    
+    // misc
     Vector2 lastParryDirection;
+    Parryable closestParryable;
+
+    Coroutine timeSlowCoroutine = null;   
+    float originalFixedDelta;
 
     private void Awake()
     {
@@ -54,20 +68,22 @@ public class PlayerCharacter : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         moveAction = playerInput.actions["Move"];
+        lookAction = playerInput.actions["Look"];
         parryAction = playerInput.actions["Block"];
         overcommitAction = playerInput.actions["Commit"];
+
+        originalFixedDelta = Time.fixedDeltaTime;
     }
 
     // parry ability
     public void OnInitialParry() // called when parry input is detected
     {
         // check directional input to determine parry direction (if there's no directional input, return)
-        if (lastParryDirection == Vector2.zero) return;
+        //if (lastParryDirection == Vector2.zero) return;
 
         // should have a short delay before input is accepted again
-        PlayAnimation("ParryStance", false, 0.1f);
-        
         currentParryState = ParryState.Anticipating;
+        PlayAnimation("ParryStance", false, 0.1f);
     }
     public void OnOvercommitParry()
     {
@@ -83,21 +99,107 @@ public class PlayerCharacter : MonoBehaviour
         // boxcast in front of player (player rotation is already aligned with block direction)
         if (currentParryState != ParryState.Anticipating) return;
 
-        Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
-        Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
-        float maxDistance = 1f;
+        //Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
+        //Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
 
-        bool HitDetect = Physics.BoxCast(boxCenter, halfExtents, transform.forward, out RaycastHit hitInfo, Quaternion.identity, maxDistance, parryableLayerMask.value, QueryTriggerInteraction.Collide);
-        if (HitDetect)
+        Vector3 point1 = transform.position;
+                point1.y += 1f;
+        Vector3 point2 = point1;
+
+        //float radius = 1f;
+        //float maxDistance = 1f;
+
+        //bool HitDetect = Physics.CapsuleCast(point1, point2, radius, Vector3.forward, out RaycastHit hitInfo, maxDistance, parryableLayerMask.value, QueryTriggerInteraction.Collide);
+        //if (HitDetect)
+        //{
+        //    Parryable parryable = hitInfo.collider.GetComponentInParent<Parryable>();
+        //    if (parryable != null)
+        //    {
+        //        Debug.Log($"Found Parryable: {parryable.name}");
+        //        closestParryable = parryable;
+        //        EnterBlockState();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("No Parryable component found");
+        //    }
+        //}
+
+        Vector3 center = transform.position + Vector3.up * 1f; // Center at player's chest height
+        float radius = 2f;
+
+        // Check all colliders within radius
+        Collider[] hitColliders = Physics.OverlapSphere(
+            center,
+            radius,
+            parryableLayerMask.value,
+            QueryTriggerInteraction.Collide
+        );
+
+        foreach (Collider collider in hitColliders)
         {
-            if (hitInfo.collider != null)
+            Parryable parryable = collider.GetComponentInParent<Parryable>();
+            if (parryable != null)
             {
-                hitInfo.collider.GetComponentInParent<Parryable>()?.OnBlock();
-
-                currentParryState = ParryState.Blocking;
-                PlayAnimation("ParryReact", true, 0.1f);
+                closestParryable = parryable;
+                EnterBlockState();
+                return;
             }
         }
+    }
+
+    void EnterBlockState()
+    {
+        currentParryState = ParryState.Blocking;
+        PlayAnimation("ParryReact", true);
+
+        Time.timeScale = 1;
+
+        StartTimeSlow();
+    }
+
+    public void StartTimeSlow()
+    {
+        if (timeSlowCoroutine != null)
+            StopCoroutine(timeSlowCoroutine);
+
+        timeSlowCoroutine = StartCoroutine(TimeSlowCoroutine());
+    }
+    IEnumerator TimeSlowCoroutine()
+    {
+        float targetScale = 0.1f;
+
+        OnTimeSlowed?.Invoke(true);
+        
+        while (Time.timeScale > targetScale + 0.01f)
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, targetScale, Time.unscaledDeltaTime * 5f);
+            Debug.Log($"Slowing... Current: {Time.timeScale}");
+
+            Time.fixedDeltaTime = originalFixedDelta * Time.timeScale;
+            yield return null;
+        }
+        Time.timeScale = targetScale;
+        Debug.Log($"Fully slowed. Scale: {Time.timeScale}");
+
+        yield return new WaitForSecondsRealtime(timeSlowDuration);
+
+        OnTimeSlowed?.Invoke(false);
+        
+        while (Time.timeScale < 0.99f)
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, Time.unscaledDeltaTime * 5f);
+            Debug.Log($"Speeding up... Current: {Time.timeScale}");
+
+            Time.fixedDeltaTime = originalFixedDelta * Time.timeScale;
+            yield return null;
+        }
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f; // Default Unity value
+        Debug.Log($"Time restored to normal. Scale: {Time.timeScale}");
+
+        yield return null;
     }
 
     #region Animation Event Callbacks
@@ -134,22 +236,18 @@ public class PlayerCharacter : MonoBehaviour
         {
             if (currentParryState == ParryState.Anticipating) return; // already parrying
 
-            if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-            {
-                lastParryDirection = moveAction.ReadValue<Vector2>();
-            }
             OnInitialParry();
         }
-        if (overcommitAction.WasPressedThisFrame())
-        {
-            if (currentParryState != ParryState.Blocking) return; // can only overcommit when blocking
+        //if (overcommitAction.WasPressedThisFrame())
+        //{
+        //    if (currentParryState != ParryState.Blocking) return; // can only overcommit when blocking
 
-            if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-            {
-                lastParryDirection = moveAction.ReadValue<Vector2>();
-            }
-            OnOvercommitParry();
-        }
+        //    if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+        //    {
+        //        lastParryDirection = moveAction.ReadValue<Vector2>();
+        //    }
+        //    OnOvercommitParry();
+        //}
 
         HandleParryState();
 
@@ -177,6 +275,8 @@ public class PlayerCharacter : MonoBehaviour
         Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
 
         ApplyMovement(movementInput, movement);
+
+        RotateToTarget();
     }
 
     private void HandleParryState() // to be called in Update() | manages input acceptance and parryable object detection
@@ -286,6 +386,31 @@ public class PlayerCharacter : MonoBehaviour
             characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
         }
     }
+
+    void RotateToTarget()
+    {
+        if (closestParryable == null) return;
+
+        Vector3 targetPos = closestParryable.transform.position - transform.position;
+        targetPos.y = 0;
+
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+        var isoMovement = matrix.MultiplyPoint3x4(targetPos.normalized);
+
+        // rotate towards movement direction
+        if (isoMovement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(isoMovement, Vector3.up);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, toRotation, 960 * Time.unscaledDeltaTime); // "maxDegreesDelta" is turn speed
+
+            transform.rotation = finalRotation;
+
+            if (finalRotation == toRotation)
+            {
+                closestParryable = null; // reset after rotation is complete
+            }
+        }
+    }
     #endregion
 
     #region Animation Playback
@@ -348,9 +473,9 @@ public class PlayerCharacter : MonoBehaviour
     {
         // draw boxcast area
         Gizmos.color = Color.red;
-        Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
-        Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
-        Gizmos.DrawWireCube(boxCenter, halfExtents * 2);
+        Vector3 boxCenter = transform.position + Vector3.up * 1f;
+        Vector3 halfExtents = new Vector3(1f, 1, 1f);
+        Gizmos.DrawWireSphere(boxCenter, 2);
     }
     #endregion
 }
