@@ -1,17 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class ProjectileBehavior : MonoBehaviour
 {
     public float startDelay = 0.6f;
     public float speed = 16f;
+    public float parriedSpeedMultiplier = 5;
+    public float parriedSpeed => speed * parriedSpeedMultiplier;
     public Vector3 direction;
 
     public float lifetime = 10f;
 
+    public int damageToDeal = 20;
+
     bool canGo = false;
 
-    bool isBlocked = false;
+    public enum ObjectState
+    {
+        None,
+        Blocked,
+        Parried
+    }
+    public ObjectState currentState;
 
     private void Start()
     {
@@ -20,13 +31,22 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (canGo) { 
-            transform.Translate(direction.normalized * speed * Time.deltaTime);
-            lifetime -= Time.deltaTime;
-            if (lifetime <= 0f)
+        if (canGo) 
+        {
+            if (currentState == ObjectState.None)
             {
-                Destroy(gameObject);
+                transform.Translate(direction.normalized * speed * Time.deltaTime);
             }
+            else if (currentState == ObjectState.Parried)
+            {
+                transform.Translate(direction.normalized * parriedSpeed * Time.deltaTime);
+            }
+        }
+
+        lifetime -= Time.deltaTime;
+        if (lifetime <= 0f)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -41,9 +61,21 @@ public class ProjectileBehavior : MonoBehaviour
     public void OnBlock()
     {
         canGo = false;
-        isBlocked = true; 
+        currentState = ObjectState.Blocked;
 
         StartCoroutine(OnBlockCoroutine(1));
+    }
+    public void OnParried(Vector3 newDirection)
+    {
+        canGo = true;
+        currentState = ObjectState.Parried;
+
+        direction = Vector3.zero;
+
+        Debug.Log($"new direction: {newDirection}");
+
+        newDirection.y = 0f;
+        direction = newDirection;
     }
 
     IEnumerator OnBlockCoroutine(float delay)

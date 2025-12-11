@@ -1,12 +1,13 @@
 using System.Collections;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 
-    // coroutine for boss attack patterns
-    // have two main loops: one for initial phase, one for 50% health phase
-    // first phase is slower, only projectile attacks | second phase is faster, melee attacks added in
+// coroutine for boss attack patterns
+// have two main loops: one for initial phase, one for 50% health phase
+// first phase is slower, only projectile attacks | second phase is faster, melee attacks added in
 
-public class BossBehavior : MonoBehaviour
+public class BossBehavior : MonoBehaviour, IDamageableObj
 {
     [System.Serializable]
     public class AttackPattern
@@ -43,6 +44,22 @@ public class BossBehavior : MonoBehaviour
 
     private Transform playerTransform;
 
+    [Header("health shit")]
+    public int maxHealth = 100;
+    public int currentHealth;
+    public UnityEvent<int, int> OnTakeDamageEvent;
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        OnTakeDamageEvent?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Debug.Log("uou won wowww!!!");
+        }
+    }
+
     public enum BossPhase
     {
         PhaseOne,
@@ -52,6 +69,8 @@ public class BossBehavior : MonoBehaviour
 
     void Start()
     {
+        currentHealth = maxHealth;
+
         playerTransform = FindFirstObjectByType<PlayerCharacter>().transform ;
 
         StartCoroutine(BossAttackPattern());
@@ -217,5 +236,19 @@ public class BossBehavior : MonoBehaviour
         SpawnProjectile(isoSpawn, currentAttack);
 
         yield return null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == null) return;
+
+        if (other.GetComponentInParent<ProjectileBehavior>() != null)
+        {
+            var proj = other.GetComponentInParent<ProjectileBehavior>();
+            if (proj.currentState == ProjectileBehavior.ObjectState.Parried)
+            {
+                TakeDamage(proj.damageToDeal);
+            }
+        }
     }
 }

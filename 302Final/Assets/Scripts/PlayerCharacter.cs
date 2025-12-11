@@ -6,13 +6,14 @@ using Unity.VisualScripting;
 
 public interface IDamageableObj
 {
-    public void TakeDamage(float damage);
+    public void TakeDamage(int damage);
 }
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour, IDamageableObj
 {
     UnityEvent OnTakeDamage;
     public UnityEvent<bool> OnTimeSlowed;
+    public UnityEvent<int, int> OnTakeDamageEvent;
 
     [Header("References")]
     [SerializeField] GameObject dotsIcon;
@@ -29,7 +30,11 @@ public class PlayerCharacter : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction parryAction;
-    //private InputAction overcommitAction;
+    private InputAction overcommitAction;
+
+    [Header("Stats")]
+    public int maxHealth = 100;
+    public int currentHealth;
 
     [Header("Movement Control")]
     [SerializeField] bool acceptMoveInput = true;
@@ -74,9 +79,22 @@ public class PlayerCharacter : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
         parryAction = playerInput.actions["Block"];
-        //overcommitAction = playerInput.actions["Commit"];
+        overcommitAction = playerInput.actions["Commit"];
 
         originalFixedDelta = Time.fixedDeltaTime;
+
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        OnTakeDamageEvent?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Debug.Log("oh no..,,, you dies....restart?");
+        }
     }
 
     #region Player Actions
@@ -97,13 +115,24 @@ public class PlayerCharacter : MonoBehaviour
             dotsIcon.SetActive(false);
         }
     }
-    void OnDeflect() // actually execute parry
+    void OnDeflect(Vector3 dir) // actually execute parry
     {
-        Debug.Log("Deflected Attack!");
-
-
-
         currentParryState = ParryState.None;
+        //Debug.Log("Deflected Attack!");
+
+        if (closestParryable != null)
+        {
+            if (closestParryable.GetComponent<ProjectileBehavior>() != null)
+            {
+                ProjectileBehavior proj = closestParryable.GetComponent<ProjectileBehavior>();
+                proj.OnParried(dir.normalized);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("no parryable object dumbass lol");
+        }
+
 
         if (dotsIcon != null)
         {
@@ -123,6 +152,8 @@ public class PlayerCharacter : MonoBehaviour
 
         Vector3 center = transform.position + Vector3.up * 1f; // Center at player's chest height
 
+        closestParryable = null;
+
         // Check all colliders within radius
         Collider[] hitColliders = Physics.OverlapSphere(center, parryDetectRadius, parryableLayerMask.value, QueryTriggerInteraction.Collide);
 
@@ -141,7 +172,8 @@ public class PlayerCharacter : MonoBehaviour
                     if (distanceFromCurrent < distanceFromClosest)
                         closestParryable = parryable;
                 }
-                else closestParryable = parryable;
+                else
+                    closestParryable = parryable;
 
                 EnterBlockState();
                 return;
@@ -298,11 +330,31 @@ public class PlayerCharacter : MonoBehaviour
                 if (lastParryDirection != Vector2.zero) // if there's a stored directional input from last frame, reflect attack
                 {
                     // reflect in last direction
+                    Vector3 reflectDir = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
+
+                    var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+                    var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
+
+                    OnDeflect(isoDir);
+                    
                     StopTimeSlow();
 
-                    OnDeflect();
                     lastParryDirection = Vector2.zero ;
                 }
+            }
+
+            if (overcommitAction.WasPressedThisFrame())
+            {
+                Vector3 reflectDir = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
+
+                var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+                var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
+
+                OnDeflect(isoDir);
+
+                StopTimeSlow();
+
+                lastParryDirection = Vector2.zero;
             }
         }
 
@@ -480,7 +532,7 @@ public class PlayerCharacter : MonoBehaviour
 
             if (finalRotation == toRotation)
             {
-                closestParryable = null; // reset after rotation is complete
+                //closestParryable = null; // reset after rotation is complete
             }
         }
     }
@@ -551,4 +603,18 @@ public class PlayerCharacter : MonoBehaviour
         Gizmos.DrawWireSphere(center, parryDetectRadius);
     }
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == null) return;
+
+        if (other.GetComponentInParent<ProjectileBehavior>() != null)
+        {
+            var proj = other.GetComponentInParent<ProjectileBehavior>();
+            if (proj.currentState == ProjectileBehavior.ObjectState.None && currentParryState != ParryState.Blocking)
+            {
+                TakeDamage(proj.damageToDeal);
+            }
+        }
+    }
 }
