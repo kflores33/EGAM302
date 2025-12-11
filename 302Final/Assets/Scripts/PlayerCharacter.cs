@@ -14,12 +14,13 @@ public class PlayerCharacter : MonoBehaviour
     UnityEvent OnTakeDamage;
     public UnityEvent<bool> OnTimeSlowed;
 
-    // references
+    [Header("References")]
+    [SerializeField] GameObject dotsIcon;
+    [SerializeField] LayerMask parryableLayerMask;
     Rigidbody rb;
     Animator animator;
     PlayerInputManager inputManager;
     CharacterController characterController;
-    [SerializeField] LayerMask parryableLayerMask;
 
     bool applyRootMotion;
 
@@ -28,7 +29,7 @@ public class PlayerCharacter : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction parryAction;
-    private InputAction overcommitAction;
+    //private InputAction overcommitAction;
 
     [Header("Movement Control")]
     [SerializeField] bool acceptMoveInput = true;
@@ -52,6 +53,9 @@ public class PlayerCharacter : MonoBehaviour
     public float timeSlowDuration = 1;
     public float slowRate = 5;
     public float speedUpRate = 5;
+
+    [Header("Parry Variables")]
+    public float parryDetectRadius = 2;
     
     // misc
     Vector2 lastParryDirection;
@@ -70,84 +74,82 @@ public class PlayerCharacter : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
         parryAction = playerInput.actions["Block"];
-        overcommitAction = playerInput.actions["Commit"];
+        //overcommitAction = playerInput.actions["Commit"];
 
         originalFixedDelta = Time.fixedDeltaTime;
     }
 
-    // parry ability
-    public void OnInitialParry() // called when parry input is detected
+    #region Player Actions
+    void OnInitialParry() // called when parry input is detected
     {
-        // check directional input to determine parry direction (if there's no directional input, return)
-        //if (lastParryDirection == Vector2.zero) return;
-
         // should have a short delay before input is accepted again
         currentParryState = ParryState.Anticipating;
         PlayAnimation("ParryStance", false, 0.1f);
     }
-    public void OnOvercommitParry()
+    void OnBlock()
     {
-        // can be activated on block (otherwise return)
-        if (lastParryDirection == Vector2.zero) return;
+        Debug.Log("Blocked Attack");
 
-        ResetParryState();
-        PlayAnimation("Overcommit", true, 0.1f);
+        currentParryState = ParryState.None;
+
+        if (dotsIcon != null)
+        {
+            dotsIcon.SetActive(false);
+        }
     }
+    void OnDeflect() // actually execute parry
+    {
+        Debug.Log("Deflected Attack!");
+
+
+
+        currentParryState = ParryState.None;
+
+        if (dotsIcon != null)
+        {
+            dotsIcon.SetActive(false);
+        }
+    }
+    #endregion
 
     void DetectParryableObject() // called during Anticipating state in Update()
     {
         // boxcast in front of player (player rotation is already aligned with block direction)
         if (currentParryState != ParryState.Anticipating) return;
 
-        //Vector3 boxCenter = transform.position + transform.forward * 0.3f + Vector3.up * 1f;
-        //Vector3 halfExtents = new Vector3(0.5f, 1, 0.3f);
-
         Vector3 point1 = transform.position;
                 point1.y += 1f;
         Vector3 point2 = point1;
 
-        //float radius = 1f;
-        //float maxDistance = 1f;
-
-        //bool HitDetect = Physics.CapsuleCast(point1, point2, radius, Vector3.forward, out RaycastHit hitInfo, maxDistance, parryableLayerMask.value, QueryTriggerInteraction.Collide);
-        //if (HitDetect)
-        //{
-        //    Parryable parryable = hitInfo.collider.GetComponentInParent<Parryable>();
-        //    if (parryable != null)
-        //    {
-        //        Debug.Log($"Found Parryable: {parryable.name}");
-        //        closestParryable = parryable;
-        //        EnterBlockState();
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("No Parryable component found");
-        //    }
-        //}
-
         Vector3 center = transform.position + Vector3.up * 1f; // Center at player's chest height
-        float radius = 2f;
 
         // Check all colliders within radius
-        Collider[] hitColliders = Physics.OverlapSphere(
-            center,
-            radius,
-            parryableLayerMask.value,
-            QueryTriggerInteraction.Collide
-        );
+        Collider[] hitColliders = Physics.OverlapSphere(center, parryDetectRadius, parryableLayerMask.value, QueryTriggerInteraction.Collide);
 
         foreach (Collider collider in hitColliders)
         {
             Parryable parryable = collider.GetComponentInParent<Parryable>();
             if (parryable != null)
             {
-                closestParryable = parryable;
+                // make sure it's actually the closest one
+                float distanceFromCurrent = (collider.transform.position - transform.position).magnitude;
+
+                if (closestParryable != null)
+                {
+                    float distanceFromClosest = (closestParryable.transform.position - transform.position).magnitude;
+
+                    if (distanceFromCurrent < distanceFromClosest)
+                        closestParryable = parryable;
+                }
+                else closestParryable = parryable;
+
                 EnterBlockState();
                 return;
             }
         }
     }
 
+    #region Block State Functions
     void EnterBlockState()
     {
         currentParryState = ParryState.Blocking;
@@ -165,6 +167,30 @@ public class PlayerCharacter : MonoBehaviour
 
         timeSlowCoroutine = StartCoroutine(TimeSlowCoroutine());
     }
+    public void StopTimeSlow()
+    {
+        if (timeSlowCoroutine != null)
+        {
+            StopCoroutine(timeSlowCoroutine);
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f;
+
+            timeSlowCoroutine = null;
+        }
+        OnTimeSlowed?.Invoke(false);
+
+        if (dotsIcon != null)
+        {
+            if (dotsIcon.activeInHierarchy)
+                dotsIcon.SetActive(false);
+        }
+        if (lastParryDirection != Vector2.zero)
+        {
+            lastParryDirection = Vector2.zero;
+        }
+
+        //Debug.Log($"Time restored to normal. Scale: {Time.timeScale}");
+    }
     IEnumerator TimeSlowCoroutine()
     {
         float targetScale = 0.1f;
@@ -174,13 +200,13 @@ public class PlayerCharacter : MonoBehaviour
         while (Time.timeScale > targetScale + 0.01f)
         {
             Time.timeScale = Mathf.Lerp(Time.timeScale, targetScale, Time.unscaledDeltaTime * 5f);
-            Debug.Log($"Slowing... Current: {Time.timeScale}");
+            //Debug.Log($"Slowing... Current: {Time.timeScale}");
 
             Time.fixedDeltaTime = originalFixedDelta * Time.timeScale;
             yield return null;
         }
         Time.timeScale = targetScale;
-        Debug.Log($"Fully slowed. Scale: {Time.timeScale}");
+        //Debug.Log($"Fully slowed. Scale: {Time.timeScale}");
 
         yield return new WaitForSecondsRealtime(timeSlowDuration);
 
@@ -189,18 +215,20 @@ public class PlayerCharacter : MonoBehaviour
         while (Time.timeScale < 0.99f)
         {
             Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, Time.unscaledDeltaTime * 5f);
-            Debug.Log($"Speeding up... Current: {Time.timeScale}");
+            //Debug.Log($"Speeding up... Current: {Time.timeScale}");
 
             Time.fixedDeltaTime = originalFixedDelta * Time.timeScale;
             yield return null;
         }
 
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f; // Default Unity value
-        Debug.Log($"Time restored to normal. Scale: {Time.timeScale}");
+        //Time.timeScale = 1f;
+        //Time.fixedDeltaTime = 0.02f; // Default Unity value
+        //Debug.Log($"Time restored to normal. Scale: {Time.timeScale}");
 
+        StopTimeSlow();
         yield return null;
     }
+    #endregion
 
     #region Animation Event Callbacks
     public void OnAnimationEnd()
@@ -232,22 +260,51 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Update()
     {
-        if (parryAction.WasPressedThisFrame())
+        if (parryAction.WasPressedThisFrame()) // check for parry input
         {
             if (currentParryState == ParryState.Anticipating) return; // already parrying
+            if (currentParryState == ParryState.Blocking) // while blocking; end state early and block attack
+            {
+                StopTimeSlow();
+
+                OnBlock();
+                return;
+            }
 
             OnInitialParry();
         }
-        //if (overcommitAction.WasPressedThisFrame())
-        //{
-        //    if (currentParryState != ParryState.Blocking) return; // can only overcommit when blocking
 
-        //    if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-        //    {
-        //        lastParryDirection = moveAction.ReadValue<Vector2>();
-        //    }
-        //    OnOvercommitParry();
-        //}
+        if (currentParryState == ParryState.Blocking) // parry related; check for deflect input
+        {
+            // log direction
+            if (lookAction.ReadValue<Vector2>() != Vector2.zero)
+            {
+                lastParryDirection = lookAction.ReadValue<Vector2>();
+
+                if (dotsIcon != null)
+                    if(!dotsIcon.activeInHierarchy)
+                        dotsIcon.SetActive(true);
+            }
+            else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+            {
+                lastParryDirection = moveAction.ReadValue<Vector2>();
+
+                if (dotsIcon != null)
+                    if (!dotsIcon.activeInHierarchy)
+                        dotsIcon.SetActive(true);
+            }
+            else // if they're both zero, compare to last direction
+            {
+                if (lastParryDirection != Vector2.zero) // if there's a stored directional input from last frame, reflect attack
+                {
+                    // reflect in last direction
+                    StopTimeSlow();
+
+                    OnDeflect();
+                    lastParryDirection = Vector2.zero ;
+                }
+            }
+        }
 
         HandleParryState();
 
@@ -269,18 +326,9 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        Vector2 movementInput = moveAction.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
-
-        ApplyMovement(movementInput, movement);
-
-        RotateToTarget();
-    }
-
     private void HandleParryState() // to be called in Update() | manages input acceptance and parryable object detection
     {
+        // prevent animation cancel mishaps
         if (currentParryState == ParryState.Anticipating)
         {
             DetectParryableObject();
@@ -306,7 +354,6 @@ public class PlayerCharacter : MonoBehaviour
             }
 
         }
-
         if (currentParryState == ParryState.Blocking)
         {
             // Debug current animation progress
@@ -330,6 +377,7 @@ public class PlayerCharacter : MonoBehaviour
             }
         }
 
+        // only allow movement input when not parrying
         if (currentParryState == ParryState.None)
         {
             if (acceptMoveInput == false)
@@ -341,6 +389,32 @@ public class PlayerCharacter : MonoBehaviour
                 acceptMoveInput = false;
         }
     } 
+
+    private void FixedUpdate()
+    {
+        Vector2 movementInput = moveAction.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
+
+        ApplyMovement(movementInput, movement);
+
+        RotateToTarget();
+
+        if (dotsIcon != null)
+        {
+            if (dotsIcon.activeInHierarchy == true)
+            {
+                Vector3 targetPos = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
+
+                var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+                var isoDir = matrix.MultiplyPoint3x4(targetPos.normalized);
+
+                Quaternion toRotation = Quaternion.LookRotation(isoDir, Vector3.up);
+                Quaternion finalRotation = Quaternion.RotateTowards(dotsIcon.transform.rotation, toRotation, 960 * Time.unscaledDeltaTime); // "maxDegreesDelta" is turn speed
+
+                dotsIcon.transform.rotation = finalRotation;
+            }
+        }
+    }
 
     #region Movement Functions
     void GetMoveInput()
@@ -386,7 +460,6 @@ public class PlayerCharacter : MonoBehaviour
             characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
         }
     }
-
     void RotateToTarget()
     {
         if (closestParryable == null) return;
@@ -465,17 +538,17 @@ public class PlayerCharacter : MonoBehaviour
 
         GUILayout.BeginArea(new Rect(10, 10, 300, 200));
         GUILayout.Label($"Current Parry State: {currentParryState}");
-        GUILayout.Label($"Last Animation Frame: {GetCurrentAnimationFrame()}");
-        GUILayout.Label($"Is Animator Playing: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
+        //GUILayout.Label($"Last Animation Frame: {GetCurrentAnimationFrame()}");
+        //GUILayout.Label($"Is Animator Playing: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
         GUILayout.EndArea();
     }
     private void OnDrawGizmosSelected()
     {
         // draw boxcast area
         Gizmos.color = Color.red;
-        Vector3 boxCenter = transform.position + Vector3.up * 1f;
-        Vector3 halfExtents = new Vector3(1f, 1, 1f);
-        Gizmos.DrawWireSphere(boxCenter, 2);
+        Vector3 center = transform.position + Vector3.up * 1f;
+        //Vector3 halfExtents = new Vector3(1f, 1, 1f);
+        Gizmos.DrawWireSphere(center, parryDetectRadius);
     }
     #endregion
 }
