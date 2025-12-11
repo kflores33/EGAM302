@@ -17,6 +17,7 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
 
     [Header("References")]
     [SerializeField] GameObject dotsIcon;
+    [SerializeField] GameObject toRotate;
     [SerializeField] LayerMask parryableLayerMask;
     Rigidbody rb;
     Animator animator;
@@ -85,7 +86,6 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
 
         currentHealth = maxHealth;
     }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -175,17 +175,18 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
                 else
                     closestParryable = parryable;
 
-                EnterBlockState();
+                EnterBlockState(closestParryable.transform.position - transform.position);
                 return;
             }
         }
     }
 
     #region Block State Functions
-    void EnterBlockState()
+    void EnterBlockState(Vector3 placeholderDirection)
     {
         currentParryState = ParryState.Blocking;
         PlayAnimation("ParryReact", true);
+        lastParryDirection = placeholderDirection;
 
         Time.timeScale = 1;
 
@@ -309,52 +310,70 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
         if (currentParryState == ParryState.Blocking) // parry related; check for deflect input
         {
             // log direction
-            if (lookAction.ReadValue<Vector2>() != Vector2.zero)
+            if (PlayerInputManager.CurrentScheme == PlayerInputManager.ControlScheme.Gamepad)
             {
-                lastParryDirection = lookAction.ReadValue<Vector2>();
-
-                if (dotsIcon != null)
-                    if(!dotsIcon.activeInHierarchy)
-                        dotsIcon.SetActive(true);
-            }
-            else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-            {
-                lastParryDirection = moveAction.ReadValue<Vector2>();
-
-                if (dotsIcon != null)
-                    if (!dotsIcon.activeInHierarchy)
-                        dotsIcon.SetActive(true);
-            }
-            else // if they're both zero, compare to last direction
-            {
-                if (lastParryDirection != Vector2.zero) // if there's a stored directional input from last frame, reflect attack
+                if (lookAction.ReadValue<Vector2>() != Vector2.zero)
                 {
-                    // reflect in last direction
+                    lastParryDirection = lookAction.ReadValue<Vector2>();
+
+                    if (dotsIcon != null)
+                        if (!dotsIcon.activeInHierarchy)
+                            dotsIcon.SetActive(true);
+                }
+                else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+                {
+                    lastParryDirection = moveAction.ReadValue<Vector2>();
+
+                    if (dotsIcon != null)
+                        if (!dotsIcon.activeInHierarchy)
+                            dotsIcon.SetActive(true);
+                }
+                else // if they're both zero, compare to last direction
+                {
+                    if (lastParryDirection != Vector2.zero) // if there's a stored directional input from last frame, reflect attack
+                    {
+                        // reflect in last direction
+                        Vector3 reflectDir = dotsIcon.transform.forward;// new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
+                        Debug.DrawLine(transform.position, transform.position + reflectDir * 20, Color.magenta, 1f);
+
+                        OnDeflect(reflectDir);
+
+                        StopTimeSlow();
+
+                        lastParryDirection = Vector2.zero;
+                    }
+                }
+            }
+            else if (PlayerInputManager.CurrentScheme == PlayerInputManager.ControlScheme.MouseKeyboard)
+            {
+                if (lookAction.ReadValue<Vector2>() != Vector2.zero)
+                {
+                    if (dotsIcon != null)
+                        if (!dotsIcon.activeInHierarchy)
+                            dotsIcon.SetActive(true);
+                }       
+                else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+                {
+                    lastParryDirection = moveAction.ReadValue<Vector2>();
+
+                    if (dotsIcon != null)
+                        if (!dotsIcon.activeInHierarchy)
+                            dotsIcon.SetActive(true);
+                }
+
+                if (overcommitAction.WasPressedThisFrame())
+                {
                     Vector3 reflectDir = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
 
                     var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
                     var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
 
                     OnDeflect(isoDir);
-                    
+
                     StopTimeSlow();
 
-                    lastParryDirection = Vector2.zero ;
+                    lastParryDirection = Vector2.zero;
                 }
-            }
-
-            if (overcommitAction.WasPressedThisFrame())
-            {
-                Vector3 reflectDir = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
-
-                var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
-                var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
-
-                OnDeflect(isoDir);
-
-                StopTimeSlow();
-
-                lastParryDirection = Vector2.zero;
             }
         }
 
@@ -496,9 +515,9 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
         if (isoMovement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(isoMovement, Vector3.up);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.deltaTime); // "maxDegreesDelta" is turn speed
+            Quaternion finalRotation = Quaternion.RotateTowards(toRotate.transform.rotation, toRotation, 720 * Time.deltaTime); // "maxDegreesDelta" is turn speed
 
-            transform.rotation = finalRotation;
+            toRotate.transform.rotation = finalRotation;
         }
 
        //set speed for walk vs run 
@@ -526,9 +545,9 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
         if (isoMovement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(isoMovement, Vector3.up);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, toRotation, 960 * Time.unscaledDeltaTime); // "maxDegreesDelta" is turn speed
+            Quaternion finalRotation = Quaternion.RotateTowards(toRotate.transform.rotation, toRotation, 960 * Time.unscaledDeltaTime); // "maxDegreesDelta" is turn speed
 
-            transform.rotation = finalRotation;
+            toRotate.transform.rotation = finalRotation;
 
             if (finalRotation == toRotation)
             {

@@ -39,7 +39,7 @@ public class ProjectileBehavior : MonoBehaviour
             }
             else if (currentState == ObjectState.Parried)
             {
-                transform.Translate(direction.normalized * parriedSpeed * Time.deltaTime);
+                transform.Translate(direction.normalized * parriedSpeed * Time.deltaTime, Space.World);
             }
         }
 
@@ -69,8 +69,6 @@ public class ProjectileBehavior : MonoBehaviour
     {
         canGo = true;
         currentState = ObjectState.Parried;
-
-        direction = Vector3.zero;
 
         Debug.Log($"new direction: {newDirection}");
 
