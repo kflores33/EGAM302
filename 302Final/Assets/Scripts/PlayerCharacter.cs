@@ -65,6 +65,7 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
     
     // misc
     Vector2 lastParryDirection;
+    Vector2 lastBlockDirection;
     Parryable closestParryable;
 
     Coroutine timeSlowCoroutine = null;   
@@ -175,19 +176,21 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
                 else
                     closestParryable = parryable;
 
-                EnterBlockState(closestParryable.transform.position - transform.position);
+                lastBlockDirection = closestParryable.transform.position - transform.position;
+
+                EnterBlockState();
                 return;
             }
         }
     }
 
     #region Block State Functions
-    void EnterBlockState(Vector3 placeholderDirection)
+    void EnterBlockState()
     {
         currentParryState = ParryState.Blocking;
         PlayAnimation("ParryReact", true);
-        lastParryDirection = placeholderDirection;
 
+        lastParryDirection = Vector2.zero;
         Time.timeScale = 1;
 
         StartTimeSlow();
@@ -346,34 +349,35 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
             }
             else if (PlayerInputManager.CurrentScheme == PlayerInputManager.ControlScheme.MouseKeyboard)
             {
-                if (lookAction.ReadValue<Vector2>() != Vector2.zero)
-                {
-                    if (dotsIcon != null)
-                        if (!dotsIcon.activeInHierarchy)
-                            dotsIcon.SetActive(true);
-                }       
-                else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-                {
-                    lastParryDirection = moveAction.ReadValue<Vector2>();
+                //if (lookAction.ReadValue<Vector2>() != Vector2.zero)
+                //{
+                //    if (dotsIcon != null)
+                //        if (!dotsIcon.activeInHierarchy)
+                //            dotsIcon.SetActive(true);
+                //}       
+                //else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+                //{
+                //    lastParryDirection = moveAction.ReadValue<Vector2>();
 
-                    if (dotsIcon != null)
-                        if (!dotsIcon.activeInHierarchy)
-                            dotsIcon.SetActive(true);
-                }
+                //    if (dotsIcon != null)
+                //        if (!dotsIcon.activeInHierarchy)
+                //            dotsIcon.SetActive(true);
+                //}
 
-                if (overcommitAction.WasPressedThisFrame())
-                {
-                    Vector3 reflectDir = new Vector3(lastParryDirection.x, 0, lastParryDirection.y);
+                //if (overcommitAction.WasPressedThisFrame())
+                //{
+                //    Vector3 reflectDir = new Vector3(lastBlockDirection.x, 0, lastBlockDirection.y);
 
-                    var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
-                    var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
+                //    var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+                //    var isoDir = matrix.MultiplyPoint3x4(reflectDir.normalized);
 
-                    OnDeflect(isoDir);
+                //    OnDeflect(isoDir);
 
-                    StopTimeSlow();
+                //    StopTimeSlow();
 
-                    lastParryDirection = Vector2.zero;
-                }
+                //    lastParryDirection = Vector2.zero;
+                //    lastBlockDirection = Vector2.zero;
+                //}
             }
         }
 
@@ -468,6 +472,11 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
 
         ApplyMovement(movementInput, movement);
 
+        if (lookAction.ReadValue<Vector2>() != Vector2.zero && currentParryState == ParryState.None)
+        {
+            RotateCharacter(lookAction.ReadValue<Vector2>());
+        }
+
         RotateToTarget();
 
         if (dotsIcon != null)
@@ -529,6 +538,19 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
         if (isMoving && currentParryState != ParryState.Anticipating)
         {
             characterController.Move(isoMovement * Time.deltaTime * finalMoveSpeed);
+        }
+    }
+    void RotateCharacter(Vector2 lookInput)
+    {
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+        var isoLook = matrix.MultiplyPoint3x4(new Vector3(lookInput.x, 0, lookInput.y).normalized);
+
+        if (isoLook != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(isoLook, Vector3.up);
+            Quaternion finalRotation = Quaternion.RotateTowards(toRotate.transform.rotation, toRotation, 720 * Time.deltaTime); // "maxDegreesDelta" is turn speed
+
+            toRotate.transform.rotation = finalRotation;
         }
     }
     void RotateToTarget()
