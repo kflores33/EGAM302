@@ -6288,15 +6288,19 @@ MonoBehaviour:
   - name: SimpleProjectile
     attackType: 1
     attackInterval: 0
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 4268995992667045022, guid: 287dff4ac7b6bc54396fd6b558a0b64e, type: 3}
   - name: ExplosiveProjectile
     attackType: 2
     attackInterval: 0
     projectilePrefab: {fileID: 0}
+  - name: GroundErupt
+    attackType: 4
+    attackInterval: 0
+    projectilePrefab: {fileID: 5345473170305395691, guid: e27d69f8a7a639044836bdb4abbbf897, type: 3}
   PhaseTwoAttacks: []
   attackSwitchDelay: 2
   isAttacking: 0
-  maxHealth: 100
+  maxHealth: 300
   currentHealth: 0
   OnTakeDamageEvent:
     m_PersistentCalls:

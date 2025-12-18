@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,6 +25,7 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
         SimpleProjectile,
         ExplosiveProjectile,
         ThrownProjectile,
+        GroundErupt,
         MeleeCharge,
         DelayedMelee,
         MultiHitMelee,
@@ -150,6 +152,9 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
                 // implement thrown projectile attack logic here
                 Debug.Log("Executing Thrown Projectile Attack");
                 break;
+            case AttackType.GroundErupt:
+                yield return StartCoroutine(GroundEruptCoroutine());
+                break;
             case AttackType.MeleeCharge:
                 yield return StartCoroutine(AttackWindup(attack));
                 // implement melee charge attack logic here
@@ -199,6 +204,10 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
             projBehavior.direction = Vector3.forward;
         }
     }
+    void SpawnGroundErupt(Vector3 position, AttackPattern attack)
+    {
+        GameObject groundErupt = Instantiate(attack.projectilePrefab, position, Quaternion.identity);
+    }
 
     IEnumerator DoubleProjectileCoroutine()
     {
@@ -234,6 +243,22 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
         isoSpawn = matrix.MultiplyPoint3x4(spawnPos); // convert to isometric space
 
         SpawnProjectile(isoSpawn, currentAttack);
+
+        yield return null;
+    }
+    IEnumerator GroundEruptCoroutine()
+    {
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0)); // isometric conversion matrix
+
+        SpawnGroundErupt(playerTransform.position, currentAttack);
+
+        yield return new WaitForSeconds(1);
+
+        SpawnGroundErupt(playerTransform.position, currentAttack);
+
+        yield return new WaitForSeconds(1);
+
+        SpawnGroundErupt(playerTransform.position, currentAttack);
 
         yield return null;
     }

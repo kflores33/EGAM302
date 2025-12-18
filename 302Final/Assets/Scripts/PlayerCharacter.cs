@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 using Unity.VisualScripting;
 
+// wanna add heal on perfect parry (blocking when projectile is very close, etc)
 public interface IDamageableObj
 {
     public void TakeDamage(int damage);
@@ -323,14 +324,14 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
                         if (!dotsIcon.activeInHierarchy)
                             dotsIcon.SetActive(true);
                 }
-                else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
-                {
-                    lastParryDirection = moveAction.ReadValue<Vector2>();
+                //else if (moveAction.ReadValue<Vector2>() != Vector2.zero)
+                //{
+                //    lastParryDirection = moveAction.ReadValue<Vector2>();
 
-                    if (dotsIcon != null)
-                        if (!dotsIcon.activeInHierarchy)
-                            dotsIcon.SetActive(true);
-                }
+                //    if (dotsIcon != null)
+                //        if (!dotsIcon.activeInHierarchy)
+                //            dotsIcon.SetActive(true);
+                //}
                 else // if they're both zero, compare to last direction
                 {
                     if (lastParryDirection != Vector2.zero) // if there's a stored directional input from last frame, reflect attack
@@ -656,6 +657,11 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
             {
                 TakeDamage(proj.damageToDeal);
             }
+        }
+        if (other.GetComponent<GroundEruptBehavior>() != null)
+        {
+            var groundErupt = other.GetComponent<GroundEruptBehavior>();
+            TakeDamage(groundErupt.damageToDeal);
         }
     }
 }
