@@ -29,6 +29,7 @@ public class PlayerInputManager : MonoBehaviour
             inputManager.Player.Look.started += DetectScheme;
             inputManager.Player.Block.started += DetectScheme;
             inputManager.Player.Commit.started += DetectScheme;
+            inputManager.UI.Click.started += DetectScheme;
     }
     private void OnDisable() 
     {
@@ -36,6 +37,7 @@ public class PlayerInputManager : MonoBehaviour
             inputManager.Player.Look.started -= DetectScheme;
             inputManager.Player.Block.started -= DetectScheme;
             inputManager.Player.Commit.started -= DetectScheme;
+            inputManager.UI.Click.started -= DetectScheme;
 
         inputManager.Disable();
     }
@@ -47,6 +49,8 @@ public class PlayerInputManager : MonoBehaviour
 
     public void EnableGameplayInput() => inputManager.Player.Enable();
     public void DisableGameplayInput() => inputManager.Player.Disable();
+    
+    public bool UIClickPressed => inputManager.UI.Click.WasPressedThisFrame();
 
     public enum ControlScheme { MouseKeyboard, Gamepad }
     public static ControlScheme CurrentScheme { get; private set; }

@@ -8,7 +8,7 @@ public class GroundEruptBehavior : MonoBehaviour
     // needs to play an animation to indicate...quick flashing color (red?) that speeds up until triggering
 
     public int damageToDeal = 0;
-    public float delayTime = 3;
+    public float delayTime = 1.2f;
     public float delayTimeElapsed;
 
     public GameObject IndicatorToGrow;

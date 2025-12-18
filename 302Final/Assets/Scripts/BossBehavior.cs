@@ -64,10 +64,11 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
 
     public enum BossPhase
     {
+        Wait,
         PhaseOne,
         PhaseTwo
     }
-    public BossPhase currentPhase = BossPhase.PhaseOne;
+    public BossPhase currentPhase = BossPhase.Wait;
 
     void Start()
     {
@@ -75,7 +76,16 @@ public class BossBehavior : MonoBehaviour, IDamageableObj
 
         playerTransform = FindFirstObjectByType<PlayerCharacter>().transform ;
 
-        StartCoroutine(BossAttackPattern());
+        //StartCoroutine(BossAttackPattern());
+    }
+
+    public void StartFight()
+    {
+        currentPhase = BossPhase.PhaseOne;
+        if (bossAttackLoop == null)
+        {
+            bossAttackLoop = StartCoroutine(BossAttackPattern());
+        }
     }
 
     IEnumerator BossAttackPattern()

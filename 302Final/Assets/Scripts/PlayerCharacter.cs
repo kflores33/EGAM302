@@ -22,7 +22,6 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
     [SerializeField] LayerMask parryableLayerMask;
     Rigidbody rb;
     Animator animator;
-    PlayerInputManager inputManager;
     CharacterController characterController;
 
     bool applyRootMotion;
@@ -74,7 +73,6 @@ public class PlayerCharacter : MonoBehaviour, IDamageableObj
 
     private void Awake()
     {
-        inputManager = PlayerInputManager.Instance;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
